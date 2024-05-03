@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Xyz_Test>
+            <version>1.0.0</version>
+        </Xyz_Test>
+    </modules>
+    <frontend>
+        <routers>
+            <xyz_test>
+                <use>standard</use>
+                <args>
+                    <module>Xyz_Test</module>
+                    <frontName>testa</frontName>
+                </args>
+            </xyz_test>
+        </routers>
+    </frontend>
+    <global>
+        <models>
+            <xyz_test>
+                <class>Xyz_Test_Model</class>
+                <!-- <resourceModel>test_resource</resourceModel> -->
+            </xyz_test>
+        </models>
+    </global>
+</config>

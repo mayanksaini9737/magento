@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_banner_index>
+        <reference name="head"  >
+            <action method="addJs"><file>banner/banner.js</file></action>
+        </reference>
+        <reference name="content">
+            <block type="banner/adminhtml_banner" name="banner" template="banner/container.phtml" /> 
+            <block type="banner/adminhtml_banner_grid" name="banner_grid" template="banner/grid.phtml" />
+        </reference>
+    </adminhtml_banner_index>
+    <adminhtml_banner_new>
+        <update handle="adminhtml_banner_edit" />
+    </adminhtml_banner_new>
+    <adminhtml_banner_edit>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="banner/adminhtml_banner_edit" name="banner_edit"></block>
+        </reference>
+    </adminhtml_banner_edit>
+</layout>

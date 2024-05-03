@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_competitors_index>
+        <reference name="content">
+            <block type="repricer/adminhtml_competitors" name="competitors" />
+        </reference>
+    </adminhtml_competitors_index>
+    <adminhtml_competitors_new>
+        <update handle="adminhtml_competitors_edit" />
+    </adminhtml_competitors_new>
+    <adminhtml_competitors_edit>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="repricer/adminhtml_competitors_edit" name="competitor_edit"></block>
+        </reference>
+    </adminhtml_competitors_edit>
+    <adminhtml_matching_index>
+        <reference name="head">
+            <action method="addJs">
+                <script>lib/jquery/jquery-1.10.2.js</script>
+            </action>
+            <action method="addJs">
+                <script>repricer/matching.js</script>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="repricer/adminhtml_matching" name="matching" />
+        </reference>
+    </adminhtml_matching_index>
+    <adminhtml_matching_edit>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="repricer/adminhtml_matching_edit" name="matching_edit"></block>
+        </reference>
+    </adminhtml_matching_edit>
+</layout>

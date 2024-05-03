@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Demo_Abc>
+            <version>2.0.0</version>
+        </Demo_Abc>
+    </modules>
+    <frontend>
+        <routers>
+            <abc>
+                <use>standard</use>
+                <args>
+                    <modules>
+                        <Demo_Abc>Demo_Abc</Demo_Abc>
+                    </modules>
+                    <frontName>abc</frontName>
+                </args>
+            </abc>
+        </routers>
+    </frontend>
+    
+</config>

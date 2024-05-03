@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Nofrills_Booklayout>
+            <version>2.0.0</version>
+        </Nofrills_Booklayout>
+    </modules>
+    <frontend>
+        <routers>
+            <booklayout>
+                <use>standard</use>
+                <args>
+                    <module>Nofrills_Booklayout</module>
+                    <frontName>nofrills</frontName>
+                </args>
+            </booklayout>
+        </routers>
+    </frontend>
+    <global>
+    </global>
+</config>

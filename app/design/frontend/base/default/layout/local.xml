@@ -1,0 +1,5 @@
+<layout version="0.1.0">
+    <abc_index_index>
+        <block type="page/html" name="root" output="toHtml" template="demo/abc/simple_page.phtml" />
+    </abc_index_index>
+</layout>
