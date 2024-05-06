@@ -25,12 +25,15 @@ class Ccc_Repricer_Block_Adminhtml_Matching_Grid_Renderer_Competitorinfo extends
         foreach ($items as $item) {
             $rowId = 'row_' . self::$rowCounter;
             self::$rowCounter++;
-
+            $productId = $item->getProductId();
+            $_pc = $productId . '-' . $item->getCompetitorId();
+            $item->addData(['pc_comb' => $_pc]);
             $output .= "<tr id='$rowId' height='23vh'>";
 
             switch ($columnIndex) {
                 case 'competitor_name':
                     $output .= "<td width='150px'>";
+                    $output .= "<input type='checkbox' data-productid='{$productId}' name='massaction' class='massaction-competitor' value='{$item->getPcComb()}'>&nbsp";
                     $output .= $item->getCompetitorName();
                     $output .= "</td>";
                     break;

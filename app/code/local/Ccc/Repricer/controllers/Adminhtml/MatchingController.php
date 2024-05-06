@@ -109,13 +109,13 @@ class Ccc_Repricer_Adminhtml_MatchingController extends Mage_Adminhtml_Controlle
         if ($this->getRequest()->isXmlHttpRequest()) {
             $repricerId = $this->getRequest()->getPost('itemId');
             $editedData = $this->getRequest()->getPost('editedData');
-            
-            $repricer =Mage::getModel('repricer/matching');
+
+            $repricer = Mage::getModel('repricer/matching');
 
             if ($repricerId) {
-                
-                $repricer->addData(['repricer_id'=>$repricerId]);
-                
+
+                $repricer->addData(['repricer_id' => $repricerId]);
+
                 foreach ($editedData as $field => $value) {
                     $repricer->addData([$field => $value]);
                 }
@@ -123,8 +123,8 @@ class Ccc_Repricer_Adminhtml_MatchingController extends Mage_Adminhtml_Controlle
                 $competitorUrl = $repricer->getCompetitorUrl();
                 $competitorPrice = $repricer->getCompetitorPrice();
 
-                switch($repricer->getReason()){
-                    case $repricer::CONST_REASON_NO_MATCH :
+                switch ($repricer->getReason()) {
+                    case $repricer::CONST_REASON_NO_MATCH:
                     case $repricer::CONST_REASON_ACTIVE:
                         if (!empty($competitorUrl) && !empty($competitorSku)) {
                             if ($competitorPrice > 0) {
@@ -142,9 +142,11 @@ class Ccc_Repricer_Adminhtml_MatchingController extends Mage_Adminhtml_Controlle
                     case $repricer::CONST_REASON_WRONG_MATCH:
                         $repricerData = Mage::getModel('repricer/matching')->load($repricerId);
                         if (!empty($competitorUrl) && !empty($competitorSku)) {
-                            if (($repricerData->getReason() == $repricer::CONST_REASON_WRONG_MATCH)
-                             && (($repricer->getCompetitorUrl() != $repricerData->getCompetitorUrl())
-                             || ($repricer->getCompetitorSku() != $repricerData->getCompetitorSku()))) {
+                            if (
+                                ($repricerData->getReason() == $repricer::CONST_REASON_WRONG_MATCH)
+                                && (($repricer->getCompetitorUrl() != $repricerData->getCompetitorUrl())
+                                    || ($repricer->getCompetitorSku() != $repricerData->getCompetitorSku()))
+                            ) {
                                 $repricer->addData(['competitor_price' => 0.0]);
                                 $repricer->addData(['reason' => $repricer::CONST_REASON_NOT_AVAILABLE]);
                             }
@@ -167,7 +169,7 @@ class Ccc_Repricer_Adminhtml_MatchingController extends Mage_Adminhtml_Controlle
 
                 $repricer->save();
             }
-        
+
             $response = array(
                 'success' => true,
                 'message' => 'Data saved successfully'
@@ -178,7 +180,7 @@ class Ccc_Repricer_Adminhtml_MatchingController extends Mage_Adminhtml_Controlle
     }
 
     public function gridAction()
-    {  
+    {
         $this->getResponse()->setBody(
             $this->getLayout()->createBlock('repricer/adminhtml_matching/grid')->getGridHtml()
         );
@@ -186,39 +188,57 @@ class Ccc_Repricer_Adminhtml_MatchingController extends Mage_Adminhtml_Controlle
 
     public function massReasonAction()
     {
-        $repricerIds = $this->getRequest()->getParam('repricer_id');
+        $requestedData = $this->getRequest()->getParam('pc_comb');
         $reason = $this->getRequest()->getParam('reason');
-        print_r($repricerIds);
-        die;
-        // echo $reason;
+
+        $pcIds = [];
+        // print_r($requestedData);
         // die;
-        if (!is_array($repricerIds)) {
-            $repricerIds = array($repricerIds);
+
+        foreach ($requestedData as $pcId) {
+            $pcIds[] = $pcId;
+        }
+
+        if (!is_array($pcIds)) {
+            $pcIds = array($pcIds);
         }
 
         try {
-            foreach ($repricerIds as $_repricerId) {
-                $matching = Mage::getModel('repricer/matching')->load($_repricerId);
-                // Check if the reason is different than the one being set
-                if ($matching->getReason() != $reason) {
-                    // echo 1;
-                    // die;
-                    print_r($matching->getData());
-                    // $matching->addData(['reason'=>$reason])->save();
-                    // $matching->setData($reason)->save();
+
+            $repricerUpdatedRows = 0;
+
+            foreach ($pcIds as $_repricer) {
+                $values = explode("-", $_repricer);
+                $productId = (int) $values[0];
+                $competitorId = (int) $values[1];
+
+                $model = Mage::getModel('repricer/matching');
+                $matching = $model->getCollection()
+                    ->addFieldToFilter('product_id', $productId)
+                    ->addFieldToFilter('competitor_id', $competitorId)
+                    ->getFirstItem();
+
+                $repricerId = $matching->getId();
+
+                if ($repricerId) {
+                    $model->addData([
+                        'product_id' => $productId,
+                        'competitor_id' => $competitorId,
+                        'repricer_id' => $repricerId
+                    ]);
+                    if ($matching->getReason() != $reason) {
+                        $matching->addData(['reason' => $reason])->save();
+                        $matching->save();
+                        $repricerUpdatedRows++;
+                    }
                 }
+
             }
-            die;
-            // Use appropriate success message based on the reason changed
-            if ($reason == 1) {
-                $this->_getSession()->addSuccess(
-                    $this->__('Total of %d record(s) have been enabled.', count($repricerIds))
-                );
-            } else {
-                $this->_getSession()->addSuccess(
-                    $this->__('Total of %d record(s) have been disabled.', count($repricerIds))
-                );
-            }
+
+            $this->_getSession()->addSuccess(
+                $this->__('Total of %d record(s) have been updated.', $repricerUpdatedRows)
+            );
+
         } catch (Exception $e) {
             $this->_getSession()->addError($e->getMessage());
         }
@@ -226,4 +246,3 @@ class Ccc_Repricer_Adminhtml_MatchingController extends Mage_Adminhtml_Controlle
         $this->_redirect('*/*/index');
     }
 }
-?>

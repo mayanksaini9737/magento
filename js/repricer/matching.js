@@ -2,6 +2,7 @@ var j = jQuery.noConflict();
 
 j(document).ready(function () {
   var reason = {};
+  var isEnabled = false;
 
   j("body").on("click", ".edit-row", function (e) {
     e.preventDefault();
@@ -165,4 +166,29 @@ j(document).ready(function () {
     a.setAttribute("data-form-key", formKey);
     cell.empty().html(a);
   });
+
+  
+  j("[name='massaction']").hide();
+  j(".massaction-checkbox").hide();
+  j(".massaction-competitor").hide();
+  j(".massaction").hide();
+  j("body").on("click", ".enable_mass_update", function (e) {
+    e.preventDefault();
+    var button = j(this);
+    isEnabled = !isEnabled;
+    if (isEnabled) {
+      j("[name='massaction']").show();
+      j(".massaction-checkbox").show();
+      j(".massaction-competitor").show();
+      j(".massaction").show();
+      button.text("Disable Mass Action")
+    } else {
+      j("[name='massaction']").hide();
+      j(".massaction-checkbox").hide();
+      j(".massaction-competitor").hide();
+      j(".massaction").hide();
+      button.text("Enable Mass Action")
+    }
+  });
+
 });

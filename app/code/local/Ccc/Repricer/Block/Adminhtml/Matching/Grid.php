@@ -40,7 +40,8 @@ class Ccc_Repricer_Block_Adminhtml_Matching_Grid extends Mage_Adminhtml_Block_Wi
             'competitor_sku' => 'main_table.competitor_sku',
             'competitor_price' => 'main_table.competitor_price',
             'reason' => 'main_table.reason',
-            'updated_date' => 'main_table.updated_date'
+            'updated_date' => 'main_table.updated_date',
+            'pc_comb' => 'GROUP_CONCAT(CONCAT(main_table.product_id, "-", main_table.competitor_id) SEPARATOR ",")'
         ];
 
         $select = $collection->getSelect();
@@ -278,8 +279,9 @@ class Ccc_Repricer_Block_Adminhtml_Matching_Grid extends Mage_Adminhtml_Block_Wi
 
     protected function _prepareMassaction()
     {
-        $this->setMassactionIdField('repricer_id');
-        $this->getMassactionBlock()->setFormFieldName('repricer_id'); 
+        $this->setMassactionIdField('pc_comb');
+        $this->setMassactionIdFieldOnlyIndexValue(true);
+        $this->getMassactionBlock()->setFormFieldName('pc_comb'); 
         $reasonArr = Mage::getModel('repricer/matching')->getReasonOptionArray();
 
         array_unshift($reasonArr, array('label' => '', 'value' => ''));
