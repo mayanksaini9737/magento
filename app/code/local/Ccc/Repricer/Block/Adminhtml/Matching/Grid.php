@@ -51,12 +51,6 @@ class Ccc_Repricer_Block_Adminhtml_Matching_Grid extends Mage_Adminhtml_Block_Wi
             ->reset(Zend_Db_Select::COLUMNS)
             ->columns($columns);
 
-        // echo $select;
-        // die;
-
-        // print_r($collection->getSize());
-        // print_r(count($collection->getData()));
-
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
@@ -72,7 +66,7 @@ class Ccc_Repricer_Block_Adminhtml_Matching_Grid extends Mage_Adminhtml_Block_Wi
                 'filter_condition_callback' => array($this, '_filterStoreCondition'),
                 'renderer' => 'repricer/adminhtml_matching_grid_renderer_productinfo',
             )
-        );
+        );      
 
         $this->addColumn(
             'competitor_name',

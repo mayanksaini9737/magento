@@ -3,7 +3,7 @@ var j = jQuery.noConflict();
 j(document).ready(function () {
   var reason = {};
   var isEnabled = false;
-
+  
   j("body").on("click", ".edit-row", function (e) {
     e.preventDefault();
 
@@ -16,9 +16,9 @@ j(document).ready(function () {
     var className = "editable-" + itemId;
     var selector = "td." + className;
 
-    var editableCells = j(selector);
+    var competitor_checkboxes = j(selector);
 
-    editableCells.each(function () {
+    competitor_checkboxes.each(function () {
       var field = j(this).data("field");
       let originalValue = j(this).text().trim();
       if (field === "reason") {
@@ -26,23 +26,43 @@ j(document).ready(function () {
           var dropdown = '<select class="edit-dropdown">';
           Object.keys(reason).forEach((element) => {
             dropdown +=
-            '<option value="' + element + '" ' + (originalValue == reason[element] ? "selected" : "") + ' data-original="' + originalValue + '">' + reason[element] + "</option>";
+              '<option value="' +
+              element +
+              '" ' +
+              (originalValue == reason[element] ? "selected" : "") +
+              ' data-original="' +
+              originalValue +
+              '">' +
+              reason[element] +
+              "</option>";
           });
           dropdown += "</select>";
           j(this).html(dropdown);
         } else {
-        //   j(this).text(originalValues[field]);
-            var dropdown = '<select class="edit-dropdown" disabled>';
-            Object.keys(reason).forEach((element) => {
+          //   j(this).text(originalValues[field]);
+          var dropdown = '<select class="edit-dropdown" disabled>';
+          Object.keys(reason).forEach((element) => {
             dropdown +=
-            '<option value="' + element + '" ' + (originalValue == reason[element] ? "selected" : "") + ' data-original="' + originalValue + '">' + reason[element] + "</option>";
-            });
-            dropdown += "</select>";
-            j(this).html(dropdown);
+              '<option value="' +
+              element +
+              '" ' +
+              (originalValue == reason[element] ? "selected" : "") +
+              ' data-original="' +
+              originalValue +
+              '">' +
+              reason[element] +
+              "</option>";
+          });
+          dropdown += "</select>";
+          j(this).html(dropdown);
         }
       } else {
         j(this).html(
-          '<input type="text" class="edit-input" value="' + originalValue + '" data-original="'+ originalValue +'">'
+          '<input type="text" class="edit-input" value="' +
+            originalValue +
+            '" data-original="' +
+            originalValue +
+            '">'
         );
       }
     });
@@ -50,10 +70,26 @@ j(document).ready(function () {
     editButton.hide();
 
     var saveButton = j(
-      '<a  href="#" data-url="'+ editUrl +'" data-reason="'+ reason +'" data-repricer-id="'+ itemId +'" data-form-key="'+ formKey +'" class="save-button">Save</a>'
+      '<a  href="#" data-url="' +
+        editUrl +
+        '" data-reason="' +
+        reason +
+        '" data-repricer-id="' +
+        itemId +
+        '" data-form-key="' +
+        formKey +
+        '" class="save-button">Save</a>'
     );
     var cancelButton = j(
-      '<a href="#" style="padding-left:5px" data-url="'+ editUrl +'" data-reason="'+ reason +'" data-repricer-id="'+ itemId +'" data-form-key="'+ formKey +'"  class="cancel-button">Cancel</a>'
+      '<a href="#" style="padding-left:5px" data-url="' +
+        editUrl +
+        '" data-reason="' +
+        reason +
+        '" data-repricer-id="' +
+        itemId +
+        '" data-form-key="' +
+        formKey +
+        '"  class="cancel-button">Cancel</a>'
     );
     var buttonContainer = j("<div>")
       .addClass("button-container")
@@ -62,7 +98,7 @@ j(document).ready(function () {
     var cell = editButton.closest("td");
     cell.empty().append(buttonContainer);
 
-    editableCells.first().find(".edit-input").focus();
+    competitor_checkboxes.first().find(".edit-input").focus();
   });
 
   j("body").on("click", ".save-button", function (e) {
@@ -75,17 +111,17 @@ j(document).ready(function () {
     var className = "editable-" + itemId;
     var selector = "td." + className;
 
-    var editableCells = j(selector);
+    var competitor_checkboxes = j(selector);
     var editedData = {};
 
-    editableCells.each(function () {
+    competitor_checkboxes.each(function () {
       var field = j(this).data("field");
       var value;
       if (field === "reason") {
-        value = j(this).find("select").val(); 
+        value = j(this).find("select").val();
         editedData[field] = value;
       } else {
-        value = j(this).find(".edit-input").val().trim(); 
+        value = j(this).find(".edit-input").val().trim();
         editedData[field] = value;
       }
 
@@ -114,7 +150,7 @@ j(document).ready(function () {
       },
     });
 
-    editableCells.removeAttr("contenteditable");
+    competitor_checkboxes.removeAttr("contenteditable");
     let newreason = JSON.stringify(reason);
 
     var cell = saveButton.closest("td");
@@ -134,25 +170,28 @@ j(document).ready(function () {
     var cancelButton = j(this);
     var editUrl = cancelButton.data("url");
     var itemId = cancelButton.data("repricer-id");
-    var formKey = cancelButton.data("form-key")
+    var formKey = cancelButton.data("form-key");
 
     var className = "editable-" + itemId;
     var selector = "td." + className;
 
-    var editableCells = j(selector);
+    var competitor_checkboxes = j(selector);
 
-    editableCells.each(function () {
+    competitor_checkboxes.each(function () {
       var field = j(this).data("field");
       if (field === "reason") {
-        var originalValue = j(this).find('select').children('option:selected').data('original');
+        var originalValue = j(this)
+          .find("select")
+          .children("option:selected")
+          .data("original");
         j(this).text(originalValue);
       } else {
-        var originalValue = j(this).find('.edit-input').data('original');
+        var originalValue = j(this).find(".edit-input").data("original");
         j(this).text(originalValue);
       }
     });
 
-    editableCells.removeAttr("contenteditable");
+    competitor_checkboxes.removeAttr("contenteditable");
     let newreason = JSON.stringify(reason);
 
     var cell = cancelButton.closest("td");
@@ -167,11 +206,11 @@ j(document).ready(function () {
     cell.empty().html(a);
   });
 
-  
   j("[name='massaction']").hide();
   j(".massaction-checkbox").hide();
   j(".massaction-competitor").hide();
   j(".massaction").hide();
+  j(".headings th:first-child, .filter th:first-child, .a-center").hide();
   j("body").on("click", ".enable_mass_update", function (e) {
     e.preventDefault();
     var button = j(this);
@@ -181,14 +220,93 @@ j(document).ready(function () {
       j(".massaction-checkbox").show();
       j(".massaction-competitor").show();
       j(".massaction").show();
-      button.text("Disable Mass Action")
+      j(".headings th:first-child, .filter th:first-child, .a-center").show();
+      button.text("Disable Mass Action");
     } else {
+      // varienGridMassaction.prototype.unselectAll();
+      j(".massaction-checkbox, .competitor-checkbox").prop("checked", false);
       j("[name='massaction']").hide();
       j(".massaction-checkbox").hide();
+      j(".headings th:first-child, .filter th:first-child, .a-center").hide();
       j(".massaction-competitor").hide();
       j(".massaction").hide();
-      button.text("Enable Mass Action")
+      button.text("Enable Mass Action");
     }
   });
 
+  j("body").on("change", ".massaction-checkbox", function (e) {
+    var isChecked = j(this).prop("checked");
+
+    var row = j(this).closest("tr");
+    var checkboxesToCheck = row.find(".competitor-checkbox");
+    checkboxesToCheck.prop("checked", isChecked);
+
+    // Check if all "competitor-checkbox" checkboxes are unchecked, then uncheck the "massaction-checkbox"
+    if (!isChecked && checkboxesToCheck.filter(":checked").length === 0) {
+      row.find(".massaction-checkbox").prop("checked", false);
+    }
+  });
+
+  j("body").on("change", ".competitor-checkbox", function (e) {
+    var isChecked = j(this).prop("checked");
+    var row = j(this).closest("tr").parent().closest("tr");
+    var checkboxToCheck = row.find(".massaction-checkbox");
+    checkboxToCheck.prop("checked", isChecked);
+
+    // Check if there are any "massaction-checkboxes" checkboxes checked
+    var anyChecked = row.find(".competitor-checkbox:checked").length > 0;
+    checkboxToCheck.prop("checked", anyChecked);
+  });
 });
+
+(varienGridMassaction.prototype.findCheckbox = function (evt) {
+  if (
+    ["a", "input", "select"].indexOf(
+      Event.element(evt).tagName.toLowerCase()
+    ) !== -1
+  ) {
+    return false;
+  }
+  checkbox = false;
+  Event.findElement(evt, "tr")
+    .select(".competitor-checkbox,.massaction-checkbox")
+    .each(
+      function (element) {
+        if (element.isMassactionCheckbox) {
+          checkbox = element;
+        }
+      }.bind(this)
+    );
+  return checkbox;
+}),
+  (varienGridMassaction.prototype.getCheckboxes = function () {
+    var result = [];
+    massactionObj = this;
+    this.grid.rows.each(function (row) {
+      var checkboxes = row.select(".competitor-checkbox, .massaction-checkbox");
+      checkboxes.each(function (checkbox) {
+        result.push(checkbox);
+      });
+    });
+    return result;
+  }),
+  (varienGridMassaction.prototype.setCheckbox = function (checkbox) {
+    if (checkbox.checked) {
+      this.checkedString = varienStringArray.add(
+        checkbox.value,
+        this.checkedString
+      );
+    } else {
+      let values = checkbox.value;
+      const arrvalues = values.split(",");
+      for (let i = 0; i < arrvalues.length; i++) {
+        // console.log(arrvalues[i]);
+        this.checkedString = varienStringArray.remove(
+          arrvalues[i],
+          this.checkedString
+        );
+      }
+    }
+    this.updateCount();
+  });
+ 

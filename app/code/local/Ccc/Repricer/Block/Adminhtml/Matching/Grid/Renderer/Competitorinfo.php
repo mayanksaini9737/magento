@@ -33,7 +33,7 @@ class Ccc_Repricer_Block_Adminhtml_Matching_Grid_Renderer_Competitorinfo extends
             switch ($columnIndex) {
                 case 'competitor_name':
                     $output .= "<td width='150px'>";
-                    $output .= "<input type='checkbox' data-productid='{$productId}' name='massaction' class='massaction-competitor' value='{$item->getPcComb()}'>&nbsp";
+                    $output .= "<input type='checkbox' name='massaction' class='competitor-checkbox' value='{$_pc}' />&nbsp";
                     $output .= $item->getCompetitorName();
                     $output .= "</td>";
                     break;
