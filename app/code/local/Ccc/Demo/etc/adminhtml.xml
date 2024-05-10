@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <demo translate="title" module="demo">
+            <title>Demo</title>
+            <sort_order>100</sort_order>
+            <children>
+                <demo translate="title" module="demo">
+                    <title>Manage Test</title>
+                    <action>adminhtml/test/index</action>
+                    <sort_order>0</sort_order>
+                </demo>
+            </children>
+        </demo>
+    </menu>
+</config>

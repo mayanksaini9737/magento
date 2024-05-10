@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <Ccc_Demo>
+            <version>1.0.0</version>
+        </Ccc_Demo>
+    </modules>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Ccc_Demo before="Mage_Adminhtml">Ccc_Demo_Adminhtml</Ccc_Demo>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <global>
+        <helpers>
+            <demo>
+                <class>Ccc_Demo_Helper</class>
+            </demo>
+        </helpers>
+        <blocks>
+            <demo>
+                <class>Ccc_Demo_Block</class>
+            </demo>
+        </blocks>
+    </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <demo>
+                    <file>demo.xml</file>
+                </demo>
+            </updates>
+        </layout>
+    </adminhtml>
+</config>

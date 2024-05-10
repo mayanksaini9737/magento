@@ -223,7 +223,6 @@ j(document).ready(function () {
       j(".headings th:first-child, .filter th:first-child, .a-center").show();
       button.text("Disable Mass Action");
     } else {
-      // varienGridMassaction.prototype.unselectAll();
       j(".massaction-checkbox, .competitor-checkbox").prop("checked", false);
       j("[name='massaction']").hide();
       j(".massaction-checkbox").hide();

@@ -21,4 +21,51 @@
             </children>
         </catalog>
     </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <catalog>
+                        <children>
+                            <repricer translate="title" module="repricer">
+                                <title>Repricer</title>
+                                <children>
+                                    <manage_repricer translate="title">
+                                        <title>Matching</title>
+                                        <children>
+                                            <actions translate="title">
+                                                <title>Actions</title>
+                                                <children>
+                                                    <show_all translate="title">
+                                                        <title>Show All</title>
+                                                    </show_all>
+                                                    <add_new translate="title">
+                                                        <title>Add New </title>
+                                                    </add_new>
+                                                    <edit translate="title">
+                                                        <title>Edit </title>
+                                                    </edit>
+                                                </children>
+                                            </actions>
+                                        </children>
+                                    </manage_repricer>
+                                </children>
+                            </repricer>
+                        </children>
+                    </catalog>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <repricer translate="title" module="repricer">
+                                        <title>Repricer Section</title>
+                                    </repricer>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
 </config>

@@ -245,4 +245,24 @@ class Ccc_Repricer_Adminhtml_MatchingController extends Mage_Adminhtml_Controlle
 
         $this->_redirect('*/*/index');
     }
+
+    protected function _isAllowed()
+    {
+        $action = strtolower($this->getRequest()->getActionName());
+        switch ($action) {
+            case 'new':
+                $aclResource = 'catalog/repricer/manage_repricer/actions/add_new'; 
+                break;
+            case 'edit':
+                $aclResource = 'catalog/repricer/manage_repricer/actions/edit';
+                break;
+            case 'index':
+                $aclResource = 'catalog/repricer/manage_repricer/actions/show_all';
+                break;
+            default:
+                $aclResource = 'catalog/repricer/manage_repricer/actions/show_all';
+                break;
+        }
+        return Mage::getSingleton('admin/session')->isAllowed($aclResource);
+    }
 }

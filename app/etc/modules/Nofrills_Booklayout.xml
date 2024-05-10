@@ -1,8 +1,0 @@
-<config>
-    <modules>
-        <Nofrills_Booklayout>
-            <active>true</active>
-            <codePool>local</codePool>
-        </Nofrills_Booklayout>
-    </modules>
-</config>

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_test_index>
+        <reference name="content">
+            <block type="demo/adminhtml_test" name="test" />
+        </reference>
+    </adminhtml_test_index>
+</layout>
