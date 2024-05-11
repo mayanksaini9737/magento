@@ -31,9 +31,15 @@ class Ccc_Repricer_Block_Adminhtml_Matching_Grid_Renderer_Competitorinfo extends
             $output .= "<tr id='$rowId' height='23vh'>";
 
             switch ($columnIndex) {
+                case 'pc_comb':
+                    $output .= "<td>";
+                    $output .= "<input type='checkbox' name='pc_comb' class='competitor-checkbox' value='{$_pc}' />&nbsp";
+                    $output .= "</td>";
+                    break;
+                    
                 case 'competitor_name':
                     $output .= "<td width='150px'>";
-                    $output .= "<input type='checkbox' name='massaction' class='competitor-checkbox' value='{$_pc}' />&nbsp";
+                    // $output .= "<input type='checkbox' name='massaction' class='competitor-checkbox' value='{$_pc}' />&nbsp";
                     $output .= $item->getCompetitorName();
                     $output .= "</td>";
                     break;

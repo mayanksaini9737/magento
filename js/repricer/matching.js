@@ -211,6 +211,7 @@ j(document).ready(function () {
   j(".massaction-competitor").hide();
   j(".massaction").hide();
   j(".headings th:first-child, .filter th:first-child, .a-center").hide();
+  j(".heading-pc-col, .pc-col").hide();
   j("body").on("click", ".enable_mass_update", function (e) {
     e.preventDefault();
     var button = j(this);
@@ -221,6 +222,7 @@ j(document).ready(function () {
       j(".massaction-competitor").show();
       j(".massaction").show();
       j(".headings th:first-child, .filter th:first-child, .a-center").show();
+      j(".heading-pc-col, .pc-col").show();
       button.text("Disable Mass Action");
     } else {
       j(".massaction-checkbox, .competitor-checkbox").prop("checked", false);
@@ -228,8 +230,10 @@ j(document).ready(function () {
       j(".massaction-checkbox").hide();
       j(".headings th:first-child, .filter th:first-child, .a-center").hide();
       j(".massaction-competitor").hide();
+      j(".heading-pc-col, .pc-col").hide();
       j(".massaction").hide();
       button.text("Enable Mass Action");
+      repricerGrid_massactionJsObject.unselectAll();
     }
   });
 

@@ -40,11 +40,6 @@
             <repricer>
                 <class>Ccc_Repricer_Block</class>
             </repricer>
-            <adminhtml>
-                <rewrite>
-                    <matching_grid>Ccc_Demo_Block_Adminhtml_Test_Grid</matching_grid>
-                </rewrite>
-            </adminhtml>
         </blocks>
         <helpers>
             <repricer>

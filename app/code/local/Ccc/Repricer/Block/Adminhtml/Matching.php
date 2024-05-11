@@ -18,8 +18,7 @@ class Ccc_Repricer_Block_Adminhtml_Matching extends Mage_Adminhtml_Block_Widget_
             'enable_mass_update',
             [
                 'label' => Mage::helper('repricer')->__('Enable Mass Action'),
-                'class' => 'enable_mass_update',
-                'onclick' => 'repricerGrid_massactionJsObject.unselectAll()'
+                'class' => 'enable_mass_update'
             ]
         );
         return parent::_prepareLayout();

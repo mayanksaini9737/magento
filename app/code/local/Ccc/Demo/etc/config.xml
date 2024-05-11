@@ -27,6 +27,16 @@
                 <class>Ccc_Demo_Block</class>
             </demo>
         </blocks>
+        <resources>
+            <demo_setup>
+                <setup>
+                    <module>Ccc_Demo</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </demo_setup>
+        </resources>
     </global>
     <adminhtml>
         <layout>

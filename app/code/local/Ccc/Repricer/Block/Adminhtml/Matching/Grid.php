@@ -51,7 +51,8 @@ class Ccc_Repricer_Block_Adminhtml_Matching_Grid extends Mage_Adminhtml_Block_Wi
             ->reset(Zend_Db_Select::COLUMNS)
             ->columns($columns);
 
-        $this->setCollection($collection);
+            $this->setCollection($collection);
+            // $this->getColumn('massaction')->setUseIndex(true);
         return parent::_prepareCollection();
     }
 
@@ -67,6 +68,21 @@ class Ccc_Repricer_Block_Adminhtml_Matching_Grid extends Mage_Adminhtml_Block_Wi
                 'renderer' => 'repricer/adminhtml_matching_grid_renderer_productinfo',
             )
         );      
+
+        $this->addColumn(
+            'pc_comb',
+            array(
+                'header' => Mage::helper('repricer')->__('Competitor'),
+                'index' => 'pc_comb',
+                'width' => '5px',
+                'align'=> 'right',
+                'type' => 'text',
+                'filter_condition_callback' => array($this, '_filterStoreCondition'),
+                'renderer' => 'repricer/adminhtml_matching_grid_renderer_competitorinfo',
+                'header_css_class' => 'heading-pc-col',
+                'column_css_class' => 'pc-col',
+            )
+        );
 
         $this->addColumn(
             'competitor_name',
@@ -276,6 +292,7 @@ class Ccc_Repricer_Block_Adminhtml_Matching_Grid extends Mage_Adminhtml_Block_Wi
         $this->setMassactionIdField('pc_comb');
         $this->setMassactionIdFieldOnlyIndexValue(true);
         $this->getMassactionBlock()->setFormFieldName('pc_comb'); 
+        // $this->getMassactionBlock()->setUseSelectAll(true);
         $reasonArr = Mage::getModel('repricer/matching')->getReasonOptionArray();
 
         array_unshift($reasonArr, array('label' => '', 'value' => ''));
