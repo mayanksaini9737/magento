@@ -132,21 +132,13 @@ j(document).ready(function () {
       }
     });
 
-    j.ajax({
-      url: editUrl,
-      type: "POST",
-      dataType: "json",
-      data: {
-        form_key: formKey,
-        itemId: itemId,
-        editedData: editedData,
-      },
-      success: function (response) {
-        console.log("Data saved successfully:", response);
-      },
-      error: function (xhr, status, error) {
-        console.log(status);
-        console.error("Error saving data:", error);
+    var params = { edited_data: editedData, item_id: itemId };
+    var data = JSON.stringify(params);
+    new Ajax.Request(editUrl, {
+      method: "post",
+      parameters: { edited_data: data },
+      onSuccess: function (response) {
+        console.log(response);
       },
     });
 
@@ -219,6 +211,7 @@ j(document).ready(function () {
     if (isEnabled) {
       j("[name='massaction']").show();
       j(".massaction-checkbox").show();
+      repricerGrid_massactionJsObject.unselectAll();
       j(".massaction-competitor").show();
       j(".massaction").show();
       j(".headings th:first-child, .filter th:first-child, .a-center").show();
@@ -233,7 +226,6 @@ j(document).ready(function () {
       j(".heading-pc-col, .pc-col").hide();
       j(".massaction").hide();
       button.text("Enable Mass Action");
-      repricerGrid_massactionJsObject.unselectAll();
     }
   });
 
@@ -282,17 +274,55 @@ j(document).ready(function () {
     );
   return checkbox;
 }),
-  (varienGridMassaction.prototype.getCheckboxes = function () {
-    var result = [];
-    massactionObj = this;
-    this.grid.rows.each(function (row) {
-      var checkboxes = row.select(".competitor-checkbox, .massaction-checkbox");
+
+(varienGridMassaction.prototype.getCheckboxes = function () {
+  var result = [];
+  this.grid.rows.each(function (row) {
+      var checkboxes = row.select('.competitor-checkbox, .massaction-checkbox');
       checkboxes.each(function (checkbox) {
-        result.push(checkbox);
+          result.push(checkbox);
       });
+  });
+  return result;
+});
+
+  (varienGridMassaction.prototype.updateCount = function () {
+    let values = this.checkedString;
+    const arrvalues = values.split(',');
+    var pId = "";
+    var id = 1;
+    if (arrvalues[0] == "") {
+        id = 0;
+    } 
+    for (let i = 0; i < arrvalues.length; i++) {
+        const arrvalue = arrvalues[i].split('-');
+        if (i == 0) {
+            pId = arrvalue[0];
+        }
+        else if (pId !== arrvalue[0]) {
+            pId = arrvalue[0];
+            id++;
+        }
+    }
+
+    this.count.update(id);
+    if (!this.grid.reloadParams) {
+        this.grid.reloadParams = {};
+    }
+    this.grid.reloadParams[this.formFieldNameInternal] = this.checkedString;
+  });
+
+  (varienGridMassaction.prototype.getCheckboxesValues = function () {
+    var result = [];
+    this.getCheckboxes().each(function (checkbox) {
+        var arrValue = checkbox.value.split(',');
+        if (arrValue.length>1) {
+            result.push(checkbox.value);
+        }
     });
     return result;
-  }),
+  });
+
   (varienGridMassaction.prototype.setCheckbox = function (checkbox) {
     if (checkbox.checked) {
       this.checkedString = varienStringArray.add(

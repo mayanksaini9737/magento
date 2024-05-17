@@ -1,6 +1,8 @@
 <?php
 class Ccc_Repricer_Block_Adminhtml_Matching_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
+    protected $_massactionBlockName = 'repricer/adminhtml_matching_massaction';
+    
     public function __construct()
     {
         parent::__construct();
@@ -8,6 +10,7 @@ class Ccc_Repricer_Block_Adminhtml_Matching_Grid extends Mage_Adminhtml_Block_Wi
         $this->setDefaultSort('repricer_id');
         $this->setDefaultDir('ASC');
         $this->setUseAjax(true);
+        $this->setTemplate('repricer/grid.phtml');
         $this->setSaveParametersInSession(true);
     }
 
@@ -41,7 +44,7 @@ class Ccc_Repricer_Block_Adminhtml_Matching_Grid extends Mage_Adminhtml_Block_Wi
             'competitor_price' => 'main_table.competitor_price',
             'reason' => 'main_table.reason',
             'updated_date' => 'main_table.updated_date',
-            'pc_comb' => 'GROUP_CONCAT(CONCAT(main_table.product_id, "-", main_table.competitor_id) SEPARATOR ",")'
+            'pc_comb' => new Zend_Db_Expr('GROUP_CONCAT(CONCAT(product_id,"-",cpev.competitor_id) ORDER BY cpev.competitor_id SEPARATOR ",")'),
         ];
 
         $select = $collection->getSelect();

@@ -107,8 +107,9 @@ class Ccc_Repricer_Adminhtml_MatchingController extends Mage_Adminhtml_Controlle
     public function editAction()
     {
         if ($this->getRequest()->isXmlHttpRequest()) {
-            $repricerId = $this->getRequest()->getPost('itemId');
-            $editedData = $this->getRequest()->getPost('editedData');
+            $Data =(Mage::helper('core')->jsonDecode($this->getRequest()->getPost('edited_data')));
+            $repricerId=$Data['item_id'];
+            $editedData=$Data['edited_data'];
 
             $repricer = Mage::getModel('repricer/matching');
 
@@ -181,8 +182,9 @@ class Ccc_Repricer_Adminhtml_MatchingController extends Mage_Adminhtml_Controlle
 
     public function gridAction()
     {
+        $this->loadLayout();
         $this->getResponse()->setBody(
-            $this->getLayout()->createBlock('repricer/adminhtml_matching/grid')->getGridHtml()
+            $this->getLayout()->createBlock('repricer/adminhtml_matching_grid')->toHtml()
         );
     }
 

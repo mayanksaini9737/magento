@@ -58,7 +58,7 @@
                             <config>
                                 <children>
                                     <repricer translate="title" module="repricer">
-                                        <title>Repricer Section</title>
+                                        <!-- <title>Repricer Section</title> -->
                                     </repricer>
                                 </children>
                             </config>

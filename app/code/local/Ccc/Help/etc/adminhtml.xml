@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <help translate="title" module="help">
+            <title>Help</title>
+            <sort_order>100</sort_order>
+            <children>
+                <contact translate="title" module="help">
+                    <title>Contact</title>
+                    <action>adminhtml/Contact/index</action>
+                    <sort_order>0</sort_order>
+                </contact>
+            </children>
+        </help>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <help translate="title" module="help">
+                        <title>Help</title>
+                        <children>
+                            <contact translate="title">
+                                <title>Contact</title>
+                                <children>
+                                    <actions translate="title">
+                                        <title>Actions</title>
+                                        <children>
+                                            <save translate="title">
+                                                <title>save</title>
+                                            </save>
+                                            <add_new translate="title">
+                                                <title>Add New </title>
+                                            </add_new>
+                                            <edit translate="title">
+                                                <title>Edit </title>
+                                            </edit>
+                                            <show_all translate="title">
+                                                <title>Show All</title>
+                                            </show_all>
+                                        </children>
+                                    </actions>
+                                </children>
+                            </contact>
+                        </children>
+                    </help>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <help module="help" translate="title" >
+                                    </help>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

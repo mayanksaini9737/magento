@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <help translate="label" module="help">
+            <label>Help</label>
+            <sort_order>200</sort_order>
+        </help>
+    </tabs>
+    <sections>
+        <help translate="label" module="help">
+            <label>Contact</label>
+            <tab>help</tab>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General Settings</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable_text translate="label comment">
+                            <label>Contact</label>
+                            <comment>Contact functionality.</comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_text>
+                        <radio_btn translate="label comment">
+                            <label>Contact Radio</label>
+                            <!-- <comment>Contact type functionality</comment> -->
+                            <frontend_type>radios</frontend_type>
+                            <source_model>help/contact</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </radio_btn>
+                        <enable_select translate="label comment">
+                            <label>Contact Type</label>
+                            <comment>Contact type functionality</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>help/contact</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_select>
+                        <enable_checkbox translate="label comment">
+                            <label>Contact Type</label>
+                            <comment>Contact type functionality</comment>
+                            <frontend_type>checkboxes</frontend_type>
+                            <source_model>help/contact</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_checkbox>
+                    </fields>
+                </general>
+            </groups>
+        </help>
+    </sections>
+</config>

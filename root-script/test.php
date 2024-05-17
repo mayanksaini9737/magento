@@ -19,4 +19,9 @@ echo "<pre>";
 // }
 // print_r($result);
 
-echo Mage::getStoreConfig('repricer/general/enable_text');
+
+// getConfigValue - System.xml
+// echo Mage::getStoreConfig('repricer/general/enable_text');
+
+$product = Mage::getModel('catalog/product')->load(439);
+print_r($product->getAttributeText('test'));

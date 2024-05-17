@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_contact_index>
+        <reference name="content">
+            <block type="help/adminhtml_contact" name="help" />
+        </reference>
+    </adminhtml_contact_index>
+    <adminhtml_contact_new>
+        <update handle="adminhtml_contact_edit" />
+    </adminhtml_contact_new>
+    <adminhtml_contact_edit>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="help/adminhtml_contact_edit" name="contact_edit"></block>
+        </reference>
+    </adminhtml_contact_edit>
+</layout>

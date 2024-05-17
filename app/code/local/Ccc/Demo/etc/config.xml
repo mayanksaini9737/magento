@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Ccc_Demo>
-            <version>1.0.0</version>
+            <version>1.0.2</version>
         </Ccc_Demo>
     </modules>
     <admin>
@@ -31,6 +31,7 @@
             <demo_setup>
                 <setup>
                     <module>Ccc_Demo</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
                 </setup>
                 <connection>
                     <use>core_setup</use>
