@@ -23,5 +23,8 @@ echo "<pre>";
 // getConfigValue - System.xml
 // echo Mage::getStoreConfig('repricer/general/enable_text');
 
-$product = Mage::getModel('catalog/product')->load(439);
-print_r($product->getAttributeText('test'));
+// $product = Mage::getModel('catalog/product')->load(439);
+// print_r($product->getAttributeText('test'));
+echo 7438;
+echo get_class(Mage::getBlockSingleton('help/contact'));
+Mage::dispatchEvent('event_practice',[]);

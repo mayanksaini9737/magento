@@ -1,6 +1,14 @@
 <?xml version="1.0"?>
 <layout>
     <adminhtml_contact_index>
+        <reference name="head">
+            <action method="addJs">
+                <script>lib/jquery/jquery-1.10.2.js</script>
+            </action>
+            <action method="addJs">
+                <script>help/contact.js</script>
+            </action>
+        </reference>
         <reference name="content">
             <block type="help/adminhtml_contact" name="help" />
         </reference>

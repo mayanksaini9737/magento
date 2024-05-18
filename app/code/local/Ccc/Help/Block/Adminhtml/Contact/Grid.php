@@ -7,6 +7,10 @@ class Ccc_Help_Block_Adminhtml_Contact_Grid extends Mage_Adminhtml_Block_Widget_
         $this->setId('ContactGrid');
         $this->setDefaultSort('contact_id');
         $this->setDefaultDir('ASC');
+
+        // for use ajax
+        $this->setUseAjax(true);
+        $this->setSaveParametersInSession(true);
     }
 
     protected function _prepareCollection()
@@ -22,7 +26,6 @@ class Ccc_Help_Block_Adminhtml_Contact_Grid extends Mage_Adminhtml_Block_Widget_
             'contact_id',
             array(
                 'header' => Mage::helper('help')->__('Contact ID'),
-                'align' => 'left',
                 'index' => 'contact_id',
             )
         );
@@ -31,8 +34,8 @@ class Ccc_Help_Block_Adminhtml_Contact_Grid extends Mage_Adminhtml_Block_Widget_
             'name',
             array(
                 'header' => Mage::helper('help')->__('Name'),
-                'align' => 'left',
                 'index' => 'name',
+                'column_css_class' => 'editable name',
             )
         );
 
@@ -40,8 +43,8 @@ class Ccc_Help_Block_Adminhtml_Contact_Grid extends Mage_Adminhtml_Block_Widget_
             'number',
             array(
                 'header' => Mage::helper('help')->__('Contact Number'),
-                'align' => 'left',
                 'index' => 'number',
+                'column_css_class' => 'editable number',
             )
         );
 
@@ -49,8 +52,8 @@ class Ccc_Help_Block_Adminhtml_Contact_Grid extends Mage_Adminhtml_Block_Widget_
             'city',
             array(
                 'header' => Mage::helper('help')->__('City'),
-                'align' => 'left',
                 'index' => 'city',
+                'column_css_class' => 'editable city',
             )
         );
 
@@ -82,11 +85,39 @@ class Ccc_Help_Block_Adminhtml_Contact_Grid extends Mage_Adminhtml_Block_Widget_
             )
         );
 
+        $this->addColumn(
+            'edit',
+            array(
+                'header' => Mage::helper('help')->__('Edit'),
+                'align' => 'left',
+                'type' => 'action',
+                'getter' => 'getId',
+                'actions' => array(
+                    array(
+                        'caption' => Mage::helper('help')->__('Edit'),
+                        'url' => array(
+                            'base' => '*/*/edit',
+                        ),
+                        'field' => 'contact_id'
+                    )
+                ),
+                'filter' => false,
+                'sortable' => false,
+                'index' => 'edit',
+                'renderer' => 'Ccc_Help_Block_Adminhtml_Contact_Grid_Renderer_Row',
+            )
+        );
+
         return parent::_prepareColumns();
     }
 
-    public function getRowUrl($row)
+    // public function getRowUrl($row)
+    // {
+    //     return $this->getUrl('*/*/edit', array('contact_id' => $row->getId()));
+    // }
+
+    public function getGridUrl()
     {
-        return $this->getUrl('*/*/edit', array('contact_id' => $row->getId()));
+        return $this->getUrl('*/*/grid', array('_current' => true));
     }
 }

@@ -1,0 +1,25 @@
+<?php 
+
+class Ccc_Help_Model_Observer 
+{
+    public function firstEvent(Varien_Event_Observer $observer)
+    {
+        $data = 50;
+        $processedData = $data/2;
+
+        // Add the processed data to the event observer
+        $observer->getEvent()->setData('first_event_data', $processedData);
+
+        echo "First event processed and data stored: " . $processedData;
+    } 
+
+    public function secondEvent(Varien_Event_Observer $observer)
+    {
+        // Retrieve the data from the event observer
+        $dataFromFirstEvent = $observer->getEvent()->getData();
+
+        // Use the data in the second event
+        // echo "Handling second event with data: " . $dataFromFirstEvent;
+        print_r($dataFromFirstEvent);
+    }
+}
