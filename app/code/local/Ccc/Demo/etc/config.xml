@@ -26,6 +26,12 @@
             <demo>
                 <class>Ccc_Demo_Block</class>
             </demo>
+            <!-- block overriding -->
+            <!-- <repricer>
+                <rewrite>
+                    <adminhtml_matching_grid>Ccc_Demo_Block_Adminhtml_Test_Grid</adminhtml_matching_grid>
+                </rewrite>
+            </repricer> -->
         </blocks>
         <resources>
             <demo_setup>
