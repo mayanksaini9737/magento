@@ -25,6 +25,6 @@ echo "<pre>";
 
 // $product = Mage::getModel('catalog/product')->load(439);
 // print_r($product->getAttributeText('test'));
-echo 7438;
 // echo get_class(Mage::getBlockSingleton('help/contact'));
 // Mage::dispatchEvent('event_practice',[]);
+echo 7438;

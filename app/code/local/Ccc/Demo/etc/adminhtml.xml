@@ -10,6 +10,11 @@
                     <action>adminhtml/test/index</action>
                     <sort_order>0</sort_order>
                 </demo>
+                <root translate="title" module="demo">
+                    <title>Manage Root</title>
+                    <action>adminhtml/root/index</action>
+                    <sort_order>0</sort_order>
+                </root>
             </children>
         </demo>
     </menu>

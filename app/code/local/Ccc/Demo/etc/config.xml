@@ -10,7 +10,7 @@
             <adminhtml>
                 <args>
                     <modules>
-                        <Ccc_Demo before="Mage_Adminhtml">Ccc_Demo_Adminhtml</Ccc_Demo>
+                        <Ccc_Demo before="Mage_Adminhtml_Help">Ccc_Demo_Adminhtml</Ccc_Demo>
                     </modules>
                 </args>
             </adminhtml>
