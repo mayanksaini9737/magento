@@ -47,6 +47,16 @@ class Ccc_Help_Block_Adminhtml_Contact_Grid extends Mage_Adminhtml_Block_Widget_
                 'column_css_class' => 'editable number',
             )
         );
+        $this->addColumn(
+            'help',
+            array(
+                'header' => Mage::helper('help')->__('Medium'),
+                'index' => 'help',
+                'type' => 'options',
+                'options' => Mage::getModel('help/contact')->getMediumArray(),
+                'column_css_class' => 'editable number',
+            )
+        );
 
         $this->addColumn(
             'city',
@@ -96,7 +106,7 @@ class Ccc_Help_Block_Adminhtml_Contact_Grid extends Mage_Adminhtml_Block_Widget_
                     array(
                         'caption' => Mage::helper('help')->__('Edit'),
                         'url' => array(
-                            'base' => '*/*/edit',
+                            'base' => '*/*/inlineEdit',
                         ),
                         'field' => 'contact_id'
                     )
@@ -119,5 +129,47 @@ class Ccc_Help_Block_Adminhtml_Contact_Grid extends Mage_Adminhtml_Block_Widget_
     public function getGridUrl()
     {
         return $this->getUrl('*/*/grid', array('_current' => true));
+    }
+
+    protected function _prepareMassaction()
+    {
+        $this->setMassactionIdField('help');
+        $this->getMassactionBlock()->setFormFieldName('help'); 
+        $mediumArr = Mage::getModel('help/contact')->getMediumArray();
+        $statusArr = Mage::getModel('help/contact')->getStatusOptionArray();
+
+        $this->getMassactionBlock()->addItem(
+            'help',
+            array(
+                'label' => Mage::helper('help')->__('Change Medium'),
+                'url' => $this->getUrl('*/*/massMedium', array('_current' => true)),
+                'additional' => array(
+                    'visibility' => array(
+                        'name' => 'medium',
+                        'type' => 'select',
+                        'class' => 'required-entry',
+                        'label' => Mage::helper('help')->__('Medium'),
+                        'values' => $mediumArr
+                    )
+                )
+            )
+        );
+        $this->getMassactionBlock()->addItem(
+            'status',
+            array(
+                'label' => Mage::helper('help')->__('Change status'),
+                'url' => $this->getUrl('*/*/massStatus', array('_current' => true)),
+                'additional' => array(
+                    'visibility' => array(
+                        'name' => 'status',
+                        'type' => 'select',
+                        'class' => 'required-entry',
+                        'label' => Mage::helper('help')->__('Status'),
+                        'values' => $statusArr
+                    )
+                )
+            )
+        );
+        return $this;
     }
 }

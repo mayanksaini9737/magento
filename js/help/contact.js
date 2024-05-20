@@ -1,25 +1,48 @@
 var j = jQuery.noConflict();
 
 j(document).ready(function () {
+  var medium = {};
+  var fields = {};
+  
   j("body").on("click", ".edit-row", function (e) {
     var editButton = j(this);
     var editUrl = editButton.data("edit-url");
     var contactId = editButton.data("contact-id");
+    medium = editButton.data("medium");
+    fields = editButton.data("fields");
 
     var row = editButton.closest("tr");
 
     var editableCells = row.find("td.editable");
 
-    editableCells.each(function () {
-    
+    editableCells.each(function (index) {
       let originalValue = j(this).text().trim();
-      j(this).html(
+      if(index == 2){
+        var dropdown = '<select class="edit-dropdown">';
+          Object.keys(medium).forEach((element) => {
+            dropdown +=
+              '<option value="' +
+              element +
+              '" ' +
+              (originalValue == medium[element] ? "selected" : "") +
+              ' data-original="' +
+              originalValue +
+              '">' +
+              medium[element] +
+              "</option>";
+          });
+        dropdown += "</select>";
+        j(this).html(dropdown);
+      }
+      else{
+        j(this).html(
         '<input type="text" class="edit-input" value="' +
           originalValue +
           '" data-original="' +
           originalValue +
           '">'
-      );
+        );
+      }
     });
 
     editButton.hide();
@@ -29,6 +52,8 @@ j(document).ready(function () {
         editUrl +
         '" data-contact-id="' +
         contactId +
+        '" data-medium="' +
+        medium +
         '" class="save-button">Save</a>'
     );
     var cancelButton = j(
@@ -36,6 +61,8 @@ j(document).ready(function () {
         editUrl +
         '" data-contact-id="' +
         contactId +
+        '" data-medium="' +
+        medium +
         '"  class="cancel-button">Cancel</a>'
     );
     var buttonContainer = j("<div>")
@@ -58,10 +85,21 @@ j(document).ready(function () {
 
     var editableCells = row.find("td.editable");
 
-    editableCells.each(function () {
-      var originalValue = j(this).find(".edit-input").data("original");
-      j(this).text(originalValue);
+    editableCells.each(function (index) {
+      if (index == 2){
+        var originalValue = j(this)
+          .find("select")
+          .children("option:selected")
+          .data("original");
+        j(this).text(originalValue);
+      }
+      else{
+        var originalValue = j(this).find(".edit-input").data("original");
+        j(this).text(originalValue);
+      }
     });
+
+    let newMedium = JSON.stringify(medium);
 
     var cell = cancelButton.closest("td");
     var a = document.createElement("a"); // Create a new anchor element
@@ -69,6 +107,7 @@ j(document).ready(function () {
     a.setAttribute("href", "#");
     a.setAttribute("class", "edit-row");
     a.setAttribute("data-edit-url", editUrl);
+    a.setAttribute("data-medium", newMedium);
     a.setAttribute("data-contact-id", contactId);
     cell.empty().html(a);
   });
@@ -84,15 +123,19 @@ j(document).ready(function () {
     var editableCells = row.find("td.editable");
     var editedData = {};
 
-    var fields = ['name', 'number', 'city'];
-    var count = 0;
+    editableCells.each(function (index) {
+      var field = fields[index];
+      if (index == 2){
+        value = j(this).find("select").val();
+        editedData[field] = value;
+        j(this).text(medium[value]);
 
-    editableCells.each(function () {
-        let field = fields[count];
+      } 
+      else {
         let value = j(this).find(".edit-input").val().trim();
         editedData[field] = value;
         j(this).text(value);
-        count++;
+      }
     });
 
     var params = { edited_data: editedData, contact_id: contactId };
@@ -105,12 +148,15 @@ j(document).ready(function () {
       },
     });
 
+    let newMedium = JSON.stringify(medium);
+
     var cell = saveButton.closest("td");
     var a = new Element("a");
     a.innerText = "Edit";
     a.setAttribute("href", "#");
     a.setAttribute("class", "edit-row");
     a.setAttribute("data-edit-url", editUrl);
+    a.setAttribute("data-medium", newMedium);
     a.setAttribute("data-contact-id", contactId);
     cell.empty().html(a);
   });

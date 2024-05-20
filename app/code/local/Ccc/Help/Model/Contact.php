@@ -14,6 +14,13 @@ class Ccc_Help_Model_Contact extends Mage_Core_Model_Abstract
             '2' => 'Pending'
         ];
     }
+    public function getMediumArray()
+    {
+        return [
+            '1' => 'Email',
+            '2' => 'Number'
+        ];
+    }
 
     // public function toOptionArray()
     // {
