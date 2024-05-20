@@ -22,4 +22,11 @@ class Ccc_Help_Model_Observer
         // echo "Handling second event with data: " . $dataFromFirstEvent;
         print_r($dataFromFirstEvent);
     }
+
+    public function testEvent(Varien_Event_Observer $observer)
+    {
+        $url = 'http://127.0.0.1/magento/root-script/test.php';
+        Mage::app()->getResponse()->setRedirect($url);
+        Mage::app()->getResponse()->sendResponse();
+    }
 }

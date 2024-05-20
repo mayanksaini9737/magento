@@ -12,6 +12,17 @@
                 </contact>
             </children>
         </help>
+        <root-script translate="title" module="help">
+            <title>Root Script</title>
+            <sort_order>200</sort_order>
+            <children>
+                <contact translate="title" module="help">
+                    <title>Test</title>
+                    <action>adminhtml/Root/index</action>
+                    <sort_order>0</sort_order>
+                </contact>
+            </children>
+        </root-script>
     </menu>
     <acl>
         <resources>

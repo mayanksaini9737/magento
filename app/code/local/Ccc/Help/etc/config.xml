@@ -51,22 +51,22 @@
                 </connection>
             </help_setup>
         </resources>
-        <!-- <events>
+        <events>
             <event_practice>
                 <observers>
-                    <first_event_observer>
+                    <!-- <first_event_observer>
                         <type>model</type>
                         <class>repricer/observer</class>
                         <method>firstEvent</method>
-                    </first_event_observer>
+                    </first_event_observer> -->
                     <second_event_observer>
                         <type>model</type>
-                        <class>r/observer</class>
-                        <method>secondEvent</method>
+                        <class>help/observer</class>
+                        <method>testEvent</method>
                     </second_event_observer>
                 </observers>
             </event_practice>
-        </events> -->
+        </events>
     </global>
     <adminhtml>
         <layout>
