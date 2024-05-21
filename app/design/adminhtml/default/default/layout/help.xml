@@ -21,5 +21,8 @@
         <reference name="content">
             <block type="help/adminhtml_contact_edit" name="contact_edit"></block>
         </reference>
+        <reference name="left">
+            <block type="help/adminhtml_contact_edit_tabs" name="contact_tab"></block>
+        </reference>
     </adminhtml_contact_edit>
 </layout>

@@ -5,16 +5,16 @@
             <title>Demo</title>
             <sort_order>100</sort_order>
             <children>
-                <demo translate="title" module="demo">
+                <manage_test translate="title" module="demo">
                     <title>Manage Test</title>
                     <action>adminhtml/test/index</action>
                     <sort_order>0</sort_order>
-                </demo>
-                <root translate="title" module="demo">
+                </manage_test>
+                <manage_root translate="title" module="demo">
                     <title>Manage Root</title>
                     <action>adminhtml/root/index</action>
                     <sort_order>0</sort_order>
-                </root>
+                </manage_root>
             </children>
         </demo>
     </menu>

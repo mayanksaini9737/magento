@@ -35,7 +35,7 @@ class Ccc_Help_Block_Adminhtml_Contact_Grid extends Mage_Adminhtml_Block_Widget_
             array(
                 'header' => Mage::helper('help')->__('Name'),
                 'index' => 'name',
-                'column_css_class' => 'editable name',
+                'column_css_class' => 'editable',
             )
         );
 
@@ -44,7 +44,7 @@ class Ccc_Help_Block_Adminhtml_Contact_Grid extends Mage_Adminhtml_Block_Widget_
             array(
                 'header' => Mage::helper('help')->__('Contact Number'),
                 'index' => 'number',
-                'column_css_class' => 'editable number',
+                'column_css_class' => 'editable',
             )
         );
         $this->addColumn(
@@ -54,7 +54,7 @@ class Ccc_Help_Block_Adminhtml_Contact_Grid extends Mage_Adminhtml_Block_Widget_
                 'index' => 'help',
                 'type' => 'options',
                 'options' => Mage::getModel('help/contact')->getMediumArray(),
-                'column_css_class' => 'editable number',
+                'column_css_class' => 'editable',
             )
         );
 
@@ -63,7 +63,7 @@ class Ccc_Help_Block_Adminhtml_Contact_Grid extends Mage_Adminhtml_Block_Widget_
             array(
                 'header' => Mage::helper('help')->__('City'),
                 'index' => 'city',
-                'column_css_class' => 'editable city',
+                'column_css_class' => 'editable',
             )
         );
 
@@ -106,9 +106,9 @@ class Ccc_Help_Block_Adminhtml_Contact_Grid extends Mage_Adminhtml_Block_Widget_
                     array(
                         'caption' => Mage::helper('help')->__('Edit'),
                         'url' => array(
-                            'base' => '*/*/inlineEdit',
+                            'base' => '#',
                         ),
-                        'field' => 'contact_id'
+                        // 'field' => 'contact_id'
                     )
                 ),
                 'filter' => false,
