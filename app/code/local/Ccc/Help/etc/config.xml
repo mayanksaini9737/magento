@@ -32,6 +32,11 @@
                 <class>Ccc_Help_Model</class>
                 <resourceModel>help_resource</resourceModel>
             </help>
+            <catalog>
+                <rewrite>
+                    <product>Ccc_Help_Model_Pro</product>
+                </rewrite>
+            </catalog>
             <help_resource>
                 <class>Ccc_Help_Model_Resource</class>
                 <entities>
