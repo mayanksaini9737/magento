@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_reportmanager_index>
+        <reference name="content">
+            <block type="reportmanager/adminhtml_reportmanager" name="reportmanager" />
+        </reference>
+    </adminhtml_reportmanager_index>
+    <adminhtml_catalog_product_index>
+        <reference name="head">
+            <action method="addJs"><script>lib/jquery/jquery-1.10.2.js</script></action>
+            <action method="addJs"><script>filterreport/save_report.js</script></action>
+        </reference>
+    </adminhtml_catalog_product_index>
+</layout>

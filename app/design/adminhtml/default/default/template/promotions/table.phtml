@@ -1,0 +1,24 @@
+<?php $products = $this->getProductsData(); ?>
+
+<?php if (sizeof($products) > 0): ?>
+    <table class="product-table">
+        <thead>
+            <tr>
+                <th class="product-name">Name</th>
+                <th class="product-sku">Sku</th>
+                <th class="product-price">Price</th>
+                <th class="product-special-price">Special Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($products as $_product): ?>
+                <tr>
+                    <td class="product-name"><?php echo $_product['name'] ?></td>
+                    <td class="product-sku"><?php echo $_product['sku'] ?></td>
+                    <td class="product-price"><?php echo $_product['price'] ?></td>
+                    <td class="product-special-price"><?php echo $_product['special_price'] ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php endif; ?>

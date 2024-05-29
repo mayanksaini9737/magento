@@ -1,0 +1,18 @@
+<div>
+    <h1><?php echo $this->getHeaderText(); ?></h1>
+    <label for="tag_name">Select Tag:</label>
+    <select name="tag_name" id="tag_name">
+        <?php foreach ($this->getPromotions() as $promotion): ?>
+            <option value="<?php echo $promotion['tag_name']; ?>">
+                <?php echo $promotion['tag_name']; ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    <button id="load-report" data-url="<?php echo $this->getUrl("*/*/getProducts")?>">Load Report</button>
+    <?php if ($this->getActiveTag()):?>
+        <input type="text" id="sku">
+        <button id="assign-tag" data-url="<?php echo $this->getUrl("*/*/assignToProduct")?>">Assign Tag</button>
+    <?php endif; ?>
+</div>
+<div id="report-container">
+</div>

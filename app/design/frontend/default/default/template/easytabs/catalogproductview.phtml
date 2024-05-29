@@ -35,6 +35,15 @@
     $_helper = $this->helper('catalog/output');
     $_product = $this->getProduct();
 ?>
+<h5>
+    <?php if ($_product->getActiveTag()): ?>
+        <p>Active Tag: <?php echo $_product->getAttributeText('active_tag'); ?></p>
+    <?php endif; ?>
+
+    <?php if ($_product->getSpecialPrice()): ?>
+        <p>Special Price: <?php echo $_product->getSpecialPrice(); ?></p>
+    <?php endif; ?>
+</h5>
 <script type="text/javascript">
     var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
 </script>

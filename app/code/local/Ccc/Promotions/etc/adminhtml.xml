@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <catalog translate="title" module="promotions">
+            <children>
+                <promotions translate="title" module="promotions">
+                    <title>Promotions</title>
+                    <children>
+                        <manage_promotions>
+                            <title>Manage Promotions</title>
+                            <sort>0</sort>
+                            <action>adminhtml/promotions/index</action>
+                        </manage_promotions>
+                        <report_promotion>
+                            <title>Promotions Report</title>
+                            <sort>20</sort>
+                            <action>adminhtml/report/index</action>
+                        </report_promotion>
+                    </children>
+                </promotions>
+            </children>
+        </catalog>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <catalog>
+                        <children>
+                            <promotions translate="title" module="promotions">
+                                <title>Promotions</title>
+                                <children>
+                                    <manage_promotions translate="title">
+                                        <title>Manage Promotion</title>
+                                        <children>
+                                            <actions translate="title">
+                                                <title>Actions</title>
+                                                <children>
+                                                    <show translate="title">
+                                                        <title>Show Promotion Grid</title>
+                                                    </show>
+                                                </children>
+                                            </actions>
+                                        </children>
+                                    </manage_promotions>
+                                    <report_promotion>
+                                        <title>Manage Report</title>
+                                        <children>
+                                            <actions translate="title">
+                                                <title>Actions</title>
+                                                <children>
+                                                    <show translate="title">
+                                                        <title>Show Report</title>
+                                                    </show>
+                                                </children>
+                                            </actions>
+                                        </children>
+                                    </report_promotion>
+                                </children>
+                            </promotions>
+                        </children>
+                    </catalog>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <promotions translate="title" module="promotions">
+                                        <!-- <title>Promotions Section</title> -->
+                                    </promotions>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

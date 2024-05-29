@@ -1,57 +1,7 @@
-<?php
-/**
- * Magento
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Open Software License (OSL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/osl-3.0.php
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@magento.com so we can send you a copy immediately.
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade Magento to newer
- * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magento.com for more information.
- *
- * @category    Mage
- * @package     Mage_Adminhtml
- * @copyright  Copyright (c) 2006-2018 Magento, Inc. (http://www.magento.com)
- * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- */
+<?php 
 
-/**
- * Adminhtml customer grid block
- *
- * @category   Mage
- * @package    Mage_Adminhtml
- * @author      Magento Core Team <core@magentocommerce.com>
- */
-class Mage_Adminhtml_Block_Catalog_Product_Grid extends Mage_Adminhtml_Block_Widget_Grid
+class Ccc_Reportmanager_Block_Adminhtml_Catalog_Product_Grid extends Mage_Adminhtml_Block_Catalog_Product_Grid
 {
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->setId('productGrid');
-        $this->setDefaultSort('entity_id');
-        $this->setDefaultDir('DESC');
-        $this->setSaveParametersInSession(true);
-        $this->setUseAjax(true);
-        $this->setVarNameFilter('product_filter');
-
-    }
-
-    protected function _getStore()
-    {
-        $storeId = (int) $this->getRequest()->getParam('store', 0);
-        return Mage::app()->getStore($storeId);
-    }
-
     protected function _prepareCollection()
     {
         $store = $this->_getStore();
@@ -117,29 +67,17 @@ class Mage_Adminhtml_Block_Catalog_Product_Grid extends Mage_Adminhtml_Block_Wid
         else {
             $collection->addAttributeToSelect('price');
             $collection->joinAttribute('status', 'catalog_product/status', 'entity_id', null, 'inner');
+            $collection->joinAttribute('special_price', 'catalog_product/special_price', 'entity_id', null, 'inner');
+            $collection->addAttributeToSelect('active_tag');
+            $collection->addAttributeToSelect('sold_count');
             $collection->joinAttribute('visibility', 'catalog_product/visibility', 'entity_id', null, 'inner');
         }
-        // change in core file
-        // $this->setCollection($collection);
+
+        $this->setCollection($collection);
 
         parent::_prepareCollection();
         $this->getCollection()->addWebsiteNamesToResult();
         return $this;
-    }
-
-    protected function _addColumnFilterToCollection($column)
-    {
-        if ($this->getCollection()) {
-            if ($column->getId() == 'websites') {
-                $this->getCollection()->joinField('websites',
-                    'catalog/product_website',
-                    'website_id',
-                    'product_id=entity_id',
-                    null,
-                    'left');
-            }
-        }
-        return parent::_addColumnFilterToCollection($column);
     }
 
     protected function _prepareColumns()
@@ -204,6 +142,30 @@ class Mage_Adminhtml_Block_Catalog_Product_Grid extends Mage_Adminhtml_Block_Wid
                 'currency_code' => $store->getBaseCurrency()->getCode(),
                 'index' => 'price',
         ));
+
+        $this->addColumn('special_price',
+        array(
+            'header'=> Mage::helper('catalog')->__('Special Price'),
+            'type'  => 'price',
+            'currency_code' => $store->getBaseCurrency()->getCode(),
+            'index' => 'special_price',
+        )); 
+
+        $this->addColumn('active_tag',
+        array(
+            'header'=> Mage::helper('catalog')->__('Active Tag'),
+            'type'  => 'options',
+            'options' => Mage::getSingleton('promotions/activetag')->getOptionArray(),
+            'index' => 'active_tag',
+        )); 
+
+        $this->addColumn('sold_count',
+        array(
+            'header'=> Mage::helper('catalog')->__('Sold Count'),
+            'type'  => 'number',
+            'default' => '0',
+            'index' => 'sold_count',
+        )); 
 
         if (Mage::helper('catalog')->isModuleEnabled('Mage_CatalogInventory')) {
             $this->addColumn('qty',
@@ -271,57 +233,5 @@ class Mage_Adminhtml_Block_Catalog_Product_Grid extends Mage_Adminhtml_Block_Wid
         }
 
         return parent::_prepareColumns();
-    }
-
-    protected function _prepareMassaction()
-    {
-        $this->setMassactionIdField('entity_id');
-        $this->getMassactionBlock()->setFormFieldName('product');
-
-        $this->getMassactionBlock()->addItem('delete', array(
-             'label'=> Mage::helper('catalog')->__('Delete'),
-             'url'  => $this->getUrl('*/*/massDelete'),
-             'confirm' => Mage::helper('catalog')->__('Are you sure?')
-        ));
-
-        $statuses = Mage::getSingleton('catalog/product_status')->getOptionArray();
-
-        array_unshift($statuses, array('label'=>'', 'value'=>''));
-        $this->getMassactionBlock()->addItem('status', array(
-             'label'=> Mage::helper('catalog')->__('Change status'),
-             'url'  => $this->getUrl('*/*/massStatus', array('_current'=>true)),
-             'additional' => array(
-                    'visibility' => array(
-                         'name' => 'status',
-                         'type' => 'select',
-                         'class' => 'required-entry',
-                         'label' => Mage::helper('catalog')->__('Status'),
-                         'values' => $statuses
-                     )
-             )
-        ));
-
-        if (Mage::getSingleton('admin/session')->isAllowed('catalog/update_attributes')){
-            $this->getMassactionBlock()->addItem('attributes', array(
-                'label' => Mage::helper('catalog')->__('Update Attributes'),
-                'url'   => $this->getUrl('*/catalog_product_action_attribute/edit', array('_current'=>true))
-            ));
-        }
-
-        Mage::dispatchEvent('adminhtml_catalog_product_grid_prepare_massaction', array('block' => $this));
-        return $this;
-    }
-
-    public function getGridUrl()
-    {
-        return $this->getUrl('*/*/grid', array('_current'=>true));
-    }
-
-    public function getRowUrl($row)
-    {
-        return $this->getUrl('*/*/edit', array(
-            'store'=>$this->getRequest()->getParam('store'),
-            'id'=>$row->getId())
-        );
     }
 }

@@ -130,7 +130,6 @@ class Ccc_Help_Adminhtml_ContactController extends Mage_Adminhtml_Controller_Act
 
     public function inlineEditAction()
     {
-        Mage::log('text', null, 'new.log');
         if ($this->getRequest()->isXmlHttpRequest()) {
             $Data =(Mage::helper('core')->jsonDecode($this->getRequest()->getPost('edited_data')));
             $contactId=$Data['contact_id'];

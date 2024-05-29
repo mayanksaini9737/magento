@@ -56,22 +56,26 @@
                 </connection>
             </help_setup>
         </resources>
-        <events>
+        <!-- <events>
             <event_practice>
                 <observers>
-                    <!-- <first_event_observer>
-                        <type>model</type>
-                        <class>repricer/observer</class>
-                        <method>firstEvent</method>
-                    </first_event_observer> -->
-                    <second_event_observer>
-                        <type>model</type>
+                    <first_event_observer>
+                        <type>singleton</type>
                         <class>help/observer</class>
-                        <method>testEvent</method>
-                    </second_event_observer>
+                        <method>firstEvent</method>
+                    </first_event_observer>
                 </observers>
             </event_practice>
-        </events>
+            <event_practice2>
+                <observers>
+                    <second_event_observer>
+                        <type>singleton</type>
+                        <class>help/observer</class>
+                        <method>secondEvent</method>
+                    </second_event_observer>
+                </observers>
+            </event_practice2>
+        </events> -->
     </global>
     <adminhtml>
         <layout>

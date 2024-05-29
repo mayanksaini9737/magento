@@ -16,7 +16,7 @@ class Ccc_Help_Model_Observer
     public function secondEvent(Varien_Event_Observer $observer)
     {
         // Retrieve the data from the event observer
-        $dataFromFirstEvent = $observer->getEvent()->getData();
+        $dataFromFirstEvent = $observer->getEvent()->getData('first_event_data');
 
         // Use the data in the second event
         // echo "Handling second event with data: " . $dataFromFirstEvent;

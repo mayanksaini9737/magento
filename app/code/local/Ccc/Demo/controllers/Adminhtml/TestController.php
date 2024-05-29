@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Ccc_Demo_Adminhtml_TestController extends Mage_Adminhtml_Controller_Action
 {

@@ -27,4 +27,22 @@ echo "<pre>";
 // print_r($product->getAttributeText('test'));
 // echo get_class(Mage::getBlockSingleton('help/contact'));
 // Mage::dispatchEvent('event_practice',[]);
-echo 7438;
+// Mage::dispatchEvent('event_practice2',[]);
+
+// $pramotion = Mage::getModel('promotions/promotions')->load('Friday Sale', 'tag_name');
+// print_r($pramotion->getPercentage());
+// $pramotion = Mage::getModel('catalog/product')->getCollection()->addFieldToFilter('entity_id', 541)
+//     ->addAttributeToSelect('sold_count');
+// // print_r($pramotion->getData());
+// foreach ($pramotion as $product) {
+//     print_r($product->getSoldCount());
+// }
+// echo 3838;
+
+// echo get_class(Mage::getModel('reportmanager/reportmanager')->getCollection());
+// $collection = Mage::getModel('promotions/promotions')->getCollection();
+// foreach ($collection as $data) {
+//     print_r($data->getTagName());
+// }
+
+
