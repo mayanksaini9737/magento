@@ -120,7 +120,7 @@ class Mage_Adminhtml_Block_Catalog_Product_Grid extends Mage_Adminhtml_Block_Wid
             $collection->joinAttribute('visibility', 'catalog_product/visibility', 'entity_id', null, 'inner');
         }
         // change in core file
-        // $this->setCollection($collection);
+        $this->setCollection($collection);
 
         parent::_prepareCollection();
         $this->getCollection()->addWebsiteNamesToResult();

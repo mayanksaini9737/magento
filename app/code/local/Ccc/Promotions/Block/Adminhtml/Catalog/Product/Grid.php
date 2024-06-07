@@ -67,7 +67,7 @@ class Ccc_Promotions_Block_Adminhtml_Catalog_Product_Grid extends Mage_Adminhtml
         else {
             $collection->addAttributeToSelect('price');
             $collection->joinAttribute('status', 'catalog_product/status', 'entity_id', null, 'inner');
-            $collection->joinAttribute('special_price', 'catalog_product/special_price', 'entity_id', null, 'inner');
+            $collection->joinAttribute('special_price', 'catalog_product/special_price', 'entity_id', null, 'left');
             $collection->addAttributeToSelect('active_tag');
             $collection->joinAttribute('visibility', 'catalog_product/visibility', 'entity_id', null, 'inner');
         }

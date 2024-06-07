@@ -4,6 +4,7 @@ class Ccc_Demo_Adminhtml_RootController extends Ccc_Help_Adminhtml_RootControlle
 {
     public function indexAction()
     {
-        Mage::dispatchEvent('event_practice', []);
+        // Mage::dispatchEvent('event_practice', []);
+        echo 93939;
     }
 }

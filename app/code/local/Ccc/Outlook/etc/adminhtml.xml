@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <Outlook translate="title" module="outlook">
+            <title>Outlook</title>
+            <sort_order>200</sort_order>
+            <children>
+                <configuration translate="title" module="outlook">
+                    <title>Configuration</title>
+                    <sort>0</sort>
+                    <action>adminhtml/configuration/index</action>
+                </configuration>
+                <email translate="title" module="outlook">
+                    <title>Email</title>
+                    <sort>0</sort>
+                    <action>adminhtml/email/index</action>
+                </email>
+            </children>
+        </Outlook>
+    </menu>
+</config>

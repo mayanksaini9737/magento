@@ -4,21 +4,6 @@ Mage::app();
 echo "<pre>";
 
 
-// Mage::getModel('repricer/observer')->SaveRepricerMatching(); 
-// Mage::getModel('repricer/observer')->uploadCsv(); 
-// Mage::getModel('repricer/observer')->downloadCsv(); 
-
-
-
-// $allCompetitors = Mage::getModel('repricer/competitors')
-//     ->getCollection();
-//     // ->getData();
-// $result = [];
-// foreach ($allCompetitors as $competitor) {
-//     $result[$competitor->getId()] = $competitor->getName();
-// }
-// print_r($result);
-
 
 // getConfigValue - System.xml
 // echo Mage::getStoreConfig('repricer/general/enable_text');
@@ -37,12 +22,35 @@ echo "<pre>";
 // foreach ($pramotion as $product) {
 //     print_r($product->getSoldCount());
 // }
-// echo 3838;
 
-// echo get_class(Mage::getModel('reportmanager/reportmanager')->getCollection());
-// $collection = Mage::getModel('promotions/promotions')->getCollection();
-// foreach ($collection as $data) {
-//     print_r($data->getTagName());
+// Mage::getModel('outlook/observer')->fetch(); 
+
+
+// $eventModel = Mage::getModel('outlook/events');
+
+// $eventCollection = $eventModel->getCollection()->addFieldToFilter('config_id', 3)->addFieldToSelect('group_id');
+// $eventCollection->getSelect()->group('group_id');
+// // $eventCollection->addFieldToFilter('group_id', '5');
+// // echo $eventCollection->getSize();
+// // print_r($eventCollection->getData());
+// foreach ($eventCollection as $_event){
+//     $newId = $_event->getGroupId();
+//     $collection = $eventModel->getCollection()->addFieldToFilter('group_id', $newId);
+//     print_r($collection->getData());
+// }
+// die;
+// $groupIds = [];
+// foreach ($eventCollection as $_event){
+//     $newId = $_event->getGroupId();
+//     if (!in_array($newId, $groupIds)){
+//         $groupIds[] = $newId;
+//     }
+// }
+
+// foreach ($groupIds as $_id) {
+//     $eventModel->checkGroupCondition($_id);
 // }
 
 
+// Mage::getModel('outlook/observer')->fetch(); 
+echo 212;

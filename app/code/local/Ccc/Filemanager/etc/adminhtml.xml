@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <filemanager translate="title" module="filemanager">
+            <title>Filemanager</title>
+            <sort_order>200</sort_order>
+            <children>
+                <manage_filemanager translate="title" module="filemanager">
+                    <title>Manage Filemanager</title>
+                    <action>adminhtml/filemanager/index</action>
+                    <sort_order>0</sort_order>
+                </manage_filemanager>
+            </children>
+        </filemanager>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <filemanager module="filemanager" translate="title" ></filemanager>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

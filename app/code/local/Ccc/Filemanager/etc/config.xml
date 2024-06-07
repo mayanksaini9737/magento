@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <Ccc_Filemanager>
+            <version></version>
+        </Ccc_Filemanager>
+    </modules>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Ccc_Filemanager before="Mage_Adminhtml">Ccc_Filemanager_Adminhtml</Ccc_Filemanager>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <filemanager>
+                    <file>filemanager.xml</file>
+                </filemanager>
+            </updates>
+        </layout>
+    </adminhtml>
+    <global>
+        <helpers>
+            <filemanager>
+                <class>Ccc_Filemanager_Helper</class>
+            </filemanager>
+        </helpers>
+        <blocks>
+            <filemanager>
+                <class>Ccc_Filemanager_Block</class>
+            </filemanager>
+        </blocks>
+        <models>
+            <filemanager>
+                <class>Ccc_Filemanager_Model</class>
+                <!-- <resourceModel>repricer_resource</resourceModel> -->
+            </filemanager>
+            <!-- <repricer_resource>
+                <class>Ccc_Repricer_Model_Resource</class>
+                <entities>
+                    <competitors>
+                        <table>ccc_repricer_competitor</table>
+                    </competitors>
+                </entities>
+                <entities>
+                    <matching>
+                        <table>ccc_repricer_matching</table>
+                    </matching>
+                </entities>
+            </repricer_resource> -->
+        </models>
+    </global>
+    
+</config>

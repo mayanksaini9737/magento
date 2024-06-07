@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <filemanager translate="label" module="filemanager">
+            <label>Filemanager</label>
+            <sort_order>200</sort_order>
+        </filemanager>
+    </tabs>
+    <sections>
+        <filemanager translate="label" module="filemanager">
+            <label>Fille manager</label>
+            <tab>filemanager</tab>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General Settings</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable_textarea translate="label comment">
+                            <label>Add Paths:</label>
+                            <comment>Add path of  files.</comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_textarea>
+                    </fields>
+                </general>
+            </groups>
+        </filemanager>
+    </sections>
+</config>
