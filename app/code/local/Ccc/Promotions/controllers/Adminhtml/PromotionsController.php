@@ -152,11 +152,12 @@ class Ccc_Promotions_Adminhtml_PromotionsController extends Mage_Adminhtml_Contr
     protected function _isAllowed()
     {
         $action = strtolower($this->getRequest()->getActionName());
-        $aclResource = '';
         switch ($action) {
             case 'index':
                 $aclResource = 'catalog/promotions/manage_promotions/actions/show'; 
                 break;
+            default:
+                $aclResource = 'catalog/promotions';
         }
         return Mage::getSingleton('admin/session')->isAllowed($aclResource);
     }

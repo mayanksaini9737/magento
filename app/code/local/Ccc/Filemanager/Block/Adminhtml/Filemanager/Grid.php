@@ -9,6 +9,7 @@ class Ccc_Filemanager_Block_Adminhtml_Filemanager_Grid extends Mage_Adminhtml_Bl
         $this->setId('filemanagerGrid');
         $this->setUseAjax(true);
         $this->setSaveParametersInSession(true);
+        // Mage::app()->getLayout()->getBlock('head')->addJs('Filemanager.js');
     }
 
     public function setTargetDir($dir){

@@ -10,7 +10,7 @@ j(document).ready(function () {
             parameters: { 'dir': path},
             onSuccess: function (response) {
                 // document.body.innerHTML = response.responseText;
-                console.log(j('#filemanagerGrid'));
+                // console.log(j('#filemanagerGrid'));
                 j('#filemanagerGrid').html(response.responseText);              
             },
         });

@@ -17,10 +17,12 @@ class Ccc_Promotions_Adminhtml_ReportController extends Mage_Adminhtml_Controlle
     protected function _isAllowed()
     {
         $action = strtolower($this->getRequest()->getActionName());
-        $aclResource = '';
         switch ($action) {
             case 'index':
                 $aclResource = 'catalog/promotions/manage_report/actions/show'; 
+                break;
+            default:
+                $aclResource = 'catalog/promotions';
                 break;
         }
         return Mage::getSingleton('admin/session')->isAllowed($aclResource);

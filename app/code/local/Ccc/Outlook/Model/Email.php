@@ -14,86 +14,129 @@ class Ccc_Outlook_Model_Email extends Mage_Core_Model_Abstract
         return $this;
     }
 
-    public function checkEvents()
-    {
+    // public function checkEvents()
+    // {
+    //     $configId = $this->_configObject->getConfigId();
+    //     $eventModel = Mage::getModel('outlook/events');
+    //     $eventCollection = $eventModel->getCollection()
+    //         ->addFieldToFilter('config_id', $configId)
+    //         ->addFieldToSelect('group_id');
+            
+    //     $eventCollection->getSelect()->group('group_id');
+        
+    //     foreach ($eventCollection as $_event){
+    //         $dispatch_event = false;
+    //         $newId = $_event->getGroupId();
+            
+    //         $collection = Mage::getModel('outlook/events')->getCollection()
+    //             ->addFieldToFilter('group_id', $newId);
+
+    //             foreach ($collection as $_rule){
+    //                 $condition = $_rule->getConditionOn();
+    //                 $operator = $_rule->getOperator();
+    //                 $value = $_rule->getValue();
+    //                 if($condition == 'from'){
+    //                     $checkRuleCollection = $eventModel->getCollection()
+    //                         ->addFieldToFilter('group_id', $newId);
+    //                     if ($operator == '='){
+    //                         $checkRuleCollection->addFieldToFilter('value', $value );
+    //                         $records = $checkRuleCollection->getSize();
+    //                         if ($records){
+    //                             $dispatch_event = true;
+    //                             continue;
+    //                         } else{
+    //                             $dispatch_event = false;
+    //                             break;
+    //                         }
+    //                     }
+    //                     if ($operator == 'like'){
+    //                         $checkRuleCollection->addFieldToFilter('value', ['like' => '%'. $value .'%']);
+    //                         $records = $checkRuleCollection->getSize();
+    //                         if ($records){
+    //                             $dispatch_event = true;
+    //                             continue;
+    //                         } else{
+    //                             $dispatch_event = false;
+    //                             break;
+    //                         }
+    //                     }
+    //                 }
+    //                 if($condition == 'subject'){
+    //                     $checkRuleCollection = $eventModel->getCollection()
+    //                         ->addFieldToFilter('group_id', $newId);
+    //                     if ($operator == '='){
+    //                         $checkRuleCollection->addFieldToFilter('value', $value );
+    //                         $records =$checkRuleCollection->getSize();
+    //                         if ($records){
+    //                             $dispatch_event = true;
+    //                             continue;
+    //                         } else{
+    //                             $dispatch_event = false;
+    //                             break;
+    //                         }
+    //                     }
+    //                     if ($operator == 'like'){
+    //                         $checkRuleCollection->addFieldToFilter('value', ['like' => '%'. $value .'%']);
+    //                         $records =$checkRuleCollection->getSize();
+    //                         if ($records){
+    //                             $dispatch_event = true;
+    //                             continue;
+    //                         } else{
+    //                             $dispatch_event = false;
+    //                             break;
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         $eventName = $collection->getFirstItem()->getEvent();
+            
+    //         if ($dispatch_event) {
+    //             Mage::dispatchEvent($eventName, ['model'=>$this]);
+    //         }
+
+    //     }
+    // }
+
+    public function checkEvents(){
+
         $configId = $this->_configObject->getConfigId();
         $eventModel = Mage::getModel('outlook/events');
         $eventCollection = $eventModel->getCollection()
-            ->addFieldToFilter('config_id', $configId)
-            ->addFieldToSelect('group_id');
-            
-        $eventCollection->getSelect()->group('group_id');
+            ->addFieldToFilter('config_id', $configId);
         
+        $groupCollection = [];
         foreach ($eventCollection as $_event){
-            $dispatch_event = false;
-            $newId = $_event->getGroupId();
-            
-            $collection = Mage::getModel('outlook/events')->getCollection()
-                ->addFieldToFilter('group_id', $newId);
+            $groupCollection[$_event->getGroupId()][] = $_event;
+        }
 
-                foreach ($collection as $_rule){
-                    $condition = $_rule->getConditionOn();
-                    $operator = $_rule->getOperator();
-                    $value = $_rule->getValue();
-                    if($condition == 'from'){
-                        $checkRuleCollection = $eventModel->getCollection()
-                            ->addFieldToFilter('group_id', $newId);
-                        if ($operator == '='){
-                            $checkRuleCollection->addFieldToFilter('value', $value );
-                            $records = $checkRuleCollection->getSize();
-                            if ($records){
-                                $dispatch_event = true;
-                                continue;
-                            } else{
-                                $dispatch_event = false;
-                                break;
-                            }
-                        }
-                        if ($operator == 'like'){
-                            $checkRuleCollection->addFieldToFilter('value', ['like' => '%'. $value .'%']);
-                            $records = $checkRuleCollection->getSize();
-                            if ($records){
-                                $dispatch_event = true;
-                                continue;
-                            } else{
-                                $dispatch_event = false;
-                                break;
-                            }
-                        }
+        foreach ($groupCollection as $_group) {
+            $dispatchFlag = true;
+            foreach ($_group as $_rule) {
+                $condition = $_rule->getConditionOn();
+                $operator = $_rule->getOperator();
+                $value = $_rule->getValue();
+
+                if($condition == 'from'){
+                    $checkValue = $this->getFrom();
+                } elseif ($condition == 'subject'){
+                    $checkValue = $this->getSubject();
+                }
+
+                if ($operator == 'like') {
+                    if (strpos($checkValue, $value) === false) {
+                        $dispatchFlag = false;
+                        break;
                     }
-                    if($condition == 'subject'){
-                        $checkRuleCollection = $eventModel->getCollection()
-                            ->addFieldToFilter('group_id', $newId);
-                        if ($operator == '='){
-                            $checkRuleCollection->addFieldToFilter('value', $value );
-                            $records =$checkRuleCollection->getSize();
-                            if ($records){
-                                $dispatch_event = true;
-                                continue;
-                            } else{
-                                $dispatch_event = false;
-                                break;
-                            }
-                        }
-                        if ($operator == 'like'){
-                            $checkRuleCollection->addFieldToFilter('value', ['like' => '%'. $value .'%']);
-                            $records =$checkRuleCollection->getSize();
-                            if ($records){
-                                $dispatch_event = true;
-                                continue;
-                            } else{
-                                $dispatch_event = false;
-                                break;
-                            }
-                        }
+                } elseif ($operator == '=') {
+                    if (strcmp($checkValue, $value) !== 0) {
+                        $dispatchFlag = false;
+                        break;
                     }
                 }
-            $eventName = $collection->getFirstItem()->getEvent();
-            
-            if ($dispatch_event) {
-                Mage::dispatchEvent($eventName, ['model'=>$this]);
             }
-
+            if ($dispatchFlag) {
+                Mage::dispatchEvent($_group[0]->getEvent(), ['model' => $this]);
+            }
         }
     }
 

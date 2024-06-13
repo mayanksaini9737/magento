@@ -39,22 +39,7 @@
         <models>
             <filemanager>
                 <class>Ccc_Filemanager_Model</class>
-                <!-- <resourceModel>repricer_resource</resourceModel> -->
             </filemanager>
-            <!-- <repricer_resource>
-                <class>Ccc_Repricer_Model_Resource</class>
-                <entities>
-                    <competitors>
-                        <table>ccc_repricer_competitor</table>
-                    </competitors>
-                </entities>
-                <entities>
-                    <matching>
-                        <table>ccc_repricer_matching</table>
-                    </matching>
-                </entities>
-            </repricer_resource> -->
         </models>
     </global>
-    
 </config>

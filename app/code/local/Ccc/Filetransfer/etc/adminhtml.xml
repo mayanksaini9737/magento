@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <filetransfer translate="title" module="filetransfer">
+            <title>Filetransfer</title>
+            <sort_order>300</sort_order>
+            <children>
+                <manage_config translate="title" module="filetransfer">
+                    <title>Manage Configuration</title>
+                    <action>adminhtml/filetransfer/index</action>
+                    <sort_order>0</sort_order>
+                </manage_config>
+                <manage_files translate="title" module="filetransfer">
+                    <title>Manage Files</title>
+                    <action>adminhtml/filetransfer/files</action>
+                    <sort_order>0</sort_order>
+                </manage_files>
+            </children>
+        </filetransfer>
+    </menu>
+</config>
