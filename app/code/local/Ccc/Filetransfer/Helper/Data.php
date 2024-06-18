@@ -3,7 +3,7 @@
 class Ccc_Filetransfer_Helper_Data extends  Mage_Core_Helper_Abstract
 {
     protected $_rows = [
-        'partNumber'=>'items.item.itemIdentification.itemIdentifier:itemNumber',
+        'partnumber'=>'items.item.itemIdentification.itemIdentifier:itemNumber',
         'depth'=>'items.item.itemIdentification.itemCharacteristics.itemDimensions.depth:value',
         'height'=>'items.item.itemIdentification.itemCharacteristics.itemDimensions.height:value',
         'length'=>'items.item.itemIdentification.itemCharacteristics.itemDimensions.length:value',
@@ -13,9 +13,9 @@ class Ccc_Filetransfer_Helper_Data extends  Mage_Core_Helper_Abstract
     public function getRows()
     {
         $rows = [];
-        foreach ($this->_rows as $row) {
+        foreach ($this->_rows as $key => $row) {
             $parts = explode(':', $row);
-            $rows[] = ['path' => $parts[0], 'attribute' => $parts[1]];
+            $rows[$key] = ['path' => $parts[0], 'attribute' => $parts[1]];
         }
         return $rows;
     }

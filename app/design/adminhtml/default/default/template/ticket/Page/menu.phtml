@@ -1,0 +1,60 @@
+<div class="nav-bar">
+    <?php echo $this->getMenuLevel($this->getMenuArray()); ?>
+
+    <a id="page-ticket-link" href="javascript:void(0);" class="create-ticket-link"><?php echo $this->__('Create Ticket') ?></a>
+</div>
+
+<div id="create-ticket-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h1>Create Ticket</h1>
+        <form id="ticket-form">
+            <div class="form-row">
+                <label for="title"><?php echo $this->__('Title') ?></label>
+                <input type="text" name="title" id="title" required>
+            </div>
+            <div class="form-row">
+                <label for="description"><?php echo $this->__('Description') ?></label>
+                <textarea name="description" id="description" required></textarea>
+            </div>
+            <div class="form-row">
+                <label for="assigned_by"><?php echo $this->__('Assigned By') ?></label>
+                <select name="assigned_by" id="assigned_by" required>
+                    <?php foreach ($this->getAdminUsers() as $user): ?>
+                        <option value="<?php echo $this->escapeHtml($user->getId()); ?>" 
+                            <?php echo $user->getId() == $this->getCurrentUser() ? 'selected' : ''; ?>>
+                            <?php echo $this->escapeHtml($user->getUsername()); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="assigned_to"><?php echo $this->__('Assigned To') ?></label>
+                <select name="assigned_to" id="assigned_to" required>
+                    <?php foreach ($this->getAdminUsers() as $user): ?>
+                        <option value="<?php echo $user->getId(); ?>"><?php echo $user->getUsername(); ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="priority"><?php echo $this->__('Priority') ?></label>
+                <input type="number" name="priority" id="priority" required>
+            </div>
+            <div class="form-row">
+                <label for="status"><?php echo $this->__('Status') ?></label>
+                <select name="status" id="status" required>
+                    <?php foreach ($this->getAllStatus() as $status): ?>
+                        <option value="<?php echo $status->getCode(); ?>"><?php echo $status->getLabel(); ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-row">
+                <input type="submit" value="<?php echo $this->__('Submit') ?>">
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    var submitUrl = '<?php echo $this->getSaveUrl() ?>';
+</script>

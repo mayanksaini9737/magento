@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_ticket_index>
+        <reference name="head">
+            <action method="addJs">
+                <script>lib/jquery/jquery-1.10.2.js</script>
+            </action>
+            <action method="addJs">
+                <script>ticket/createTable.js</script>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/ticket/ticketTable.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="ticket/adminhtml_ticket" name="ticket.table" />
+        </reference>
+    </adminhtml_ticket_index>
+
+    <adminhtml_ticket_view>
+        <reference name="head">
+            <action method="addJs">
+                <script>lib/jquery/jquery-1.10.2.js</script>
+            </action>
+            <action method="addJs">
+                <script>ticket/viewTicket.js</script>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/ticket/viewTicket.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="ticket/adminhtml_view" name="ticket.view" />
+        </reference>
+    </adminhtml_ticket_view>
+</layout>   

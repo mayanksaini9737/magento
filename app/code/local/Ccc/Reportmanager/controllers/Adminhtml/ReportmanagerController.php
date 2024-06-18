@@ -42,6 +42,7 @@ class Ccc_Reportmanager_Adminhtml_ReportmanagerController extends Mage_Adminhtml
     {
         if ($this->getRequest()->isXmlHttpRequest()) {
             $data =$this->getRequest()->getPost('filterData');
+            print_r($data);
 
             $user = Mage::getSingleton('admin/session')->getUser();
             $userId = $user->getId();

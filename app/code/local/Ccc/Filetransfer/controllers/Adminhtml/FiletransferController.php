@@ -193,8 +193,8 @@ class Ccc_Filetransfer_Adminhtml_FiletransferController extends Mage_Adminhtml_C
         }
         $csvFilePath = $csvDir . DS . pathinfo($filename, PATHINFO_FILENAME) . '.csv';
 
-        $partNumberDetails = Mage::helper('filetransfer')->getRows();
-        $xmlData = $this->readXml($xml, $partNumberDetails);
+        $rows_data = Mage::helper('filetransfer')->getRows();
+        $xmlData = $this->readXml($xml, $rows_data);
         
         // echo "<pre>";
         // print_r($xmlData);
@@ -216,30 +216,17 @@ class Ccc_Filetransfer_Adminhtml_FiletransferController extends Mage_Adminhtml_C
         foreach ($xml->xpath('//items/item') as $item) {
             $data = [];
 
-            foreach ($rows as $row) {
+            foreach ($rows as $key => $row) {
                 $pathParts = explode('.', $row['path']);
                 $attribute = $row['attribute'];
-                // echo "<pre>";
-                // print_r($pathParts);
-                // print_r($attribute);
 
                 $currentElement = $item;
                 for ($i = 2; $i < count($pathParts); $i++) {
-                    // print_r($currentElement->{$pathParts[$i]});
                     $currentElement = $currentElement->{$pathParts[$i]};
                 }
 
-                if ($row['attribute'] == 'itemNumber') {
-                    $values = [];
-                    foreach ($currentElement as $element) {
-                        $values[] = (string) $element[$attribute];
-                    }
-                    $data['partNumber'] = implode(',', $values);
-                } else {
-                    $data[$pathParts[count($pathParts) - 1]] = (string) $currentElement[$attribute];
-                }
+                $data[$key] = (string) $currentElement[$attribute];
             }
-
             $result[] = $data;
         }
 
@@ -264,5 +251,12 @@ class Ccc_Filetransfer_Adminhtml_FiletransferController extends Mage_Adminhtml_C
         file_put_contents($csvFile, $csv);
 
         return $filePaths;
+    }
+
+    public function sellerAction()
+    {
+        $this->_title($this->__('Manage Seller'))->_title($this->__('Filetransfer'));
+        $this->_initAction();
+        $this->renderLayout();
     }
 }

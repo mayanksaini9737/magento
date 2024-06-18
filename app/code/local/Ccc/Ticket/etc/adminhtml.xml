@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <ticket translate="title" module="ticket">
+            <title>Ticket</title>
+            <sort_order>400</sort_order>
+            <children>
+                <view_ticket translate="title" module="ticket">
+                    <title>Show Ticket</title>
+                    <action>adminhtml/ticket/index</action>
+                    <sort_order>0</sort_order>
+                </view_ticket>
+            </children>
+        </ticket>
+    </menu>
+</config>

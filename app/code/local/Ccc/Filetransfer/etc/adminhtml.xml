@@ -15,6 +15,11 @@
                     <action>adminhtml/filetransfer/files</action>
                     <sort_order>0</sort_order>
                 </manage_files>
+                <manage_seller translate="title" module="filetransfer">
+                    <title>Manage Seller</title>
+                    <action>adminhtml/filetransfer/seller</action>
+                    <sort_order>0</sort_order>
+                </manage_seller>
             </children>
         </filetransfer>
     </menu>

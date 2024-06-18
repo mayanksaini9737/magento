@@ -50,6 +50,15 @@
                     <files>
                         <table>ccc_filetransfer_files</table>
                     </files>
+                    <seller>
+                        <table>ccc_partnumber_seller</table>
+                    </seller>
+                    <newseller>
+                        <table>ccc_new_part</table>
+                    </newseller>
+                    <discseller>
+                        <table>ccc_discountinue_part</table>
+                    </discseller>
                 </entities>
             </filetransfer_resource>
         </models>

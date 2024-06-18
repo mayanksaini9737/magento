@@ -1,0 +1,86 @@
+/* Reset default browser styles */
+.ticket-grid {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ticket-grid th, .ticket-grid td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.ticket-grid th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.ticket-grid td {
+    background-color: #fff;
+}
+
+.ticket-grid tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+.status{
+    font-size: large;
+    font-weight: 900;
+}
+
+.view-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.view-button:hover {
+    background-color: #0056b3;
+}
+
+.custom-pagination {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.custom-pagination .pagination {
+    list-style-type: none;
+    padding: 0;
+    display: inline-block;
+}
+
+.custom-pagination .pagination li {
+    display: inline;
+    margin: 0 5px;
+}
+
+.custom-pagination .pagination li a {
+    color: #007bff;
+    text-decoration: none;
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.custom-pagination .pagination li a:hover {
+    background-color: #ddd;
+    border-color: #007bff;
+}
+
+.custom-pagination .pagination li.active a {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.custom-pagination .pagination li.active a:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+

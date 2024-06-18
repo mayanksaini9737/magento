@@ -1,0 +1,47 @@
+<?php $tickets = $this->getTicketCollection(); ?>
+<?php $currentPage = $this->getCurrentPage(); ?>
+<?php $totalPages = $this->getTotalPages(); ?>
+
+<table class="ticket-grid">
+    <h1>Manage Tickets</h1>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Priority</th>
+            <th>Assigned By</th>
+            <th>Assigned To</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($tickets as $ticket): ?>
+            <tr>
+                <td><?php echo $this->escapeHtml($ticket->getTitle()); ?></td>
+                <td><?php echo $this->escapeHtml($ticket->getDescription()); ?></td>
+                <td><?php echo $this->escapeHtml($ticket->getPriority()); ?></td>
+                <td><?php echo $this->getUsername($ticket->getAssignedBy()); ?></td>
+                <td><?php echo $this->getUsername($ticket->getAssignedTo()); ?></td>
+                <td class="status" style="background-color:<?php echo $this->getStatusColorCode($ticket->getStatus()); ?>; color:#fff">
+                    <?php echo $this->escapeHtml($this->getLabelOfCode($ticket->getStatus())); ?>
+                </td>
+                <td>
+                    <a class="view-button" href="<?php echo $this->getUrl('adminhtml/ticket/view', array('id' => $ticket->getId())); ?>">
+                        View
+                    </a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<div class="custom-pagination">
+    <ul class="pagination"></ul>
+</div>
+
+<script type="text/javascript">
+    var currentPage = <?php echo $currentPage; ?>;
+    var totalPages = <?php echo $totalPages; ?>;
+    var baseUrl = '<?php echo $this->getUrl('*/*/*'); ?>';
+</script>

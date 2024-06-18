@@ -19,4 +19,9 @@
             <block type="filetransfer/adminhtml_files" name="files.grid" />
         </reference>
     </adminhtml_filetransfer_files>
+    <adminhtml_filetransfer_seller>
+        <reference name="content">
+            <block type="filetransfer/adminhtml_seller" name="seller.grid" />
+        </reference>
+    </adminhtml_filetransfer_seller>
 </layout>

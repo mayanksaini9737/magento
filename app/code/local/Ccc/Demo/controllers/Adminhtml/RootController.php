@@ -6,6 +6,6 @@ class Ccc_Demo_Adminhtml_RootController extends Ccc_Help_Adminhtml_RootControlle
     {
         // Mage::dispatchEvent('event_practice', []);
         // echo 93939;
-        $model = Mage::getModel('filetransfer/observer')->ftpFetch();
+        // $model = Mage::getModel('filetransfer/observer')->seller();
     }
 }
