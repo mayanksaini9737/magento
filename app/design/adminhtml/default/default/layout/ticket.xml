@@ -30,7 +30,9 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="ticket/adminhtml_view" name="ticket.view" />
+            <block type="ticket/adminhtml_view" name="ticket.view">
+                <block type="ticket/adminhtml_comment" name="ticket.view.comment" as="comment" />
+            </block>
         </reference>
     </adminhtml_ticket_view>
 </layout>   

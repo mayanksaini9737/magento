@@ -1,22 +1,22 @@
 var j = jQuery.noConflict();
 
 j(document).ready(function () {
-    j('#ticket-form').submit(function (event) {
+    j('.ticket-form').submit(function (event) {
         event.preventDefault(); 
-
+        var submitUrl = j(this).data('url');
         var formData = j(this).serialize(); 
         
         new Ajax.Request(submitUrl, {
             method: "post",
             parameters: formData,
             onSuccess: function (response) {
-                j('#create-ticket-modal').hide(); 
+                j('.modal').hide(); 
                 ticketForm[0].reset();
             },
         });
     });
 
-    var modal = j('#create-ticket-modal');
+    var modal = j('.modal');
     var ticketLink = j('.create-ticket-link');
     var closeBtn = j('.close');
 

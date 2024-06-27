@@ -1,0 +1,23 @@
+<?php $comments = $this->getCommentCollection();
+    // print_r($comments); ?>
+<h1>Comments</h1>
+
+<div class="completed-dropdown">
+    <label for="comp">Completed : </label>
+    <select class="selectCompleted" name="comp">
+        <option value="">select</option>
+        <option value="1">Hide</option>
+        <option value="">Show</option>
+    </select>
+</div>
+
+<table>
+    <tbody>
+        <?php
+        echo $this->renderComments($comments);
+        ?>
+        <?php
+        echo $this->renderLockAndAddQue();
+        ?>
+    </tbody>
+</table>

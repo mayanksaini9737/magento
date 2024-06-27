@@ -12,7 +12,7 @@ class Ccc_Ticket_Block_Adminhtml_Page_Menu extends Mage_Adminhtml_Block_Page_Men
     {
         $this->getLayout()->getBlock('head')->addCss('css/ticket/createForm.css');
         $this->getLayout()->getBlock('head')->addJs('lib/jquery/jquery-1.10.2.js');
-        $this->getLayout()->getBlock('head')->addJs('ticket/createForm.js');
+        $this->getLayout()->getBlock('head')->addJs('ticket/createTicket.js');
         return parent::_prepareLayout();
     }
 

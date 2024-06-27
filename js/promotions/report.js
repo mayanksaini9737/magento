@@ -14,7 +14,7 @@ j(document).ready(function () {
             parameters: { edited_data: data },
             onSuccess: function (response) {
                 // let text = JSON.parse(response.responseText)
-                $('report-container').update(response.responseText);
+                j('report-container').update(response.responseText);
                 // console.log(response);
                 // var responseData = response.responseJSON;
                 // createTable(responseData);

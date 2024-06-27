@@ -40,4 +40,18 @@ class Ccc_Ticket_Block_Adminhtml_Ticket extends Mage_Adminhtml_Block_Widget_Cont
     {
         return Mage::getModel('admin/user')->load($id)->getUsername();
     }
+    public function getAdminUsers(){
+        $collection = Mage::getModel('admin/user')->getCollection();
+        return $collection;
+    }
+    public function getCurrentFilters()
+    {
+        return $this->getRequest()->getParam('filter', []);
+    }
+    public function getAllStatus(){
+        return Mage::getModel('ticket/status')->getCollection();
+    }
+    public function getAllFilters(){
+        return Mage::getModel('ticket/filter')->getCollection();
+    }
 }

@@ -1,7 +1,7 @@
 <?php $ticket = $this->getTicketDetails(); ?>
 <?php $adminUsers = $this->getAdminUsers(); ?>
 <?php $allStatus = $this->getAllStatus(); ?>
-<?php $comments = $this->getAllComments($ticket->getTicketId()); ?>
+<?php $comments = $this->commentExist($ticket->getTicketId());?>
 
 <div class="ticket-details">
     <h1><?php echo $this->escapeHtml($this->__('Ticket Details')); ?></h1>
@@ -24,7 +24,7 @@
     <div class="ticket-item">
         <div class="ticket-label"><?php echo $this->__('Assigned By'); ?>:</div>
         <div class="ticket-value">
-            <select class="editable" name="assigned_by" data-id="<?php echo $ticket->getTicketId(); ?>">
+            <select class="editable" name="assigned_by" data-id="<?php echo $ticket->getTicketId(); ?>" data-url="<?php echo $this->getUpdateUrl() ?>">
                 <?php foreach ($adminUsers as $user): ?>
                     <option value="<?php echo $user->getId(); ?>" <?php if ($ticket->getAssignedBy() == $user->getId()) echo 'selected'; ?>>
                         <?php echo $this->escapeHtml($user->getUsername()); ?>
@@ -37,7 +37,7 @@
     <div class="ticket-item">
         <div class="ticket-label"><?php echo $this->__('Assigned To'); ?>:</div>
         <div class="ticket-value">
-            <select class="editable" name="assigned_to" data-id="<?php echo $ticket->getTicketId(); ?>">
+            <select class="editable" name="assigned_to" data-id="<?php echo $ticket->getTicketId(); ?>" data-url="<?php echo $this->getUpdateUrl() ?>">
                 <?php foreach ($adminUsers as $user): ?>
                     <option value="<?php echo $user->getId(); ?>" <?php if ($ticket->getAssignedTo() == $user->getId()) echo 'selected'; ?>>
                         <?php echo $this->escapeHtml($user->getUsername()); ?>
@@ -55,7 +55,7 @@
     <div class="ticket-item">
         <div class="ticket-label"><?php echo $this->__('Status'); ?>:</div>
         <div class="ticket-value">
-            <select style="background-color:<?php echo $this->getStatusColorCode($ticket->getStatus()); ?>;color:#fff" class="editable status" name="status" data-id="<?php echo $ticket->getTicketId(); ?>">
+            <select style="background-color:<?php echo $this->getStatusColorCode($ticket->getStatus()); ?>;color:#fff" class="editable status" name="status" data-id="<?php echo $ticket->getTicketId(); ?>" data-url="<?php echo $this->getUpdateUrl() ?>">
                 <?php foreach ($allStatus as $status): ?>
                     <option style="background-color:<?php echo $this->getStatusColorCode($status->getCode()); ?>;" class="editable" name="status" data-id="<?php echo $ticket->getTicketId(); ?>"  value="<?php echo $status->getCode(); ?>" <?php if ($ticket->getStatus() == $status->getCode()) echo 'selected'; ?>>
                         <?php echo $this->escapeHtml($status->getLabel()); ?>
@@ -66,41 +66,28 @@
     </div>
 </div>
 
-<?php //$formKey = Mage::getSingleton('core/session')->getFormKey(); ?>
 <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+<?php if (!$comments): ?>
 <div class="comment-section">
     <h2><?php echo $this->__('Post a Comment'); ?></h2>
     <form id="comment-form" method="post", action="<?php echo $this->getSaveCommentUrl() ?>">
         <?php echo $this->getBlockHtml('formkey') ?>
-    <!-- <input type="hidden" name="form_key" value="<?php //echo $formKey; ?>" /> -->
         <input type="hidden" name="ticket_id" value="<?php echo $ticket->getTicketId() ?>">
         <input type="hidden" name="user_id" value="<?php echo $this->getCurrentUser() ?>">
         <div class="comment-item">
-            <textarea name="comment" id="comment" placeholder="<?php echo $this->__('Write your comment here...'); ?>"></textarea>
+            <textarea name="comment" id="commentBox" placeholder="<?php echo $this->__('Write your comment here...'); ?>"></textarea>
         </div>
         <div class="comment-item">
             <button type="submit"><?php echo $this->__('Submit Comment'); ?></button>
         </div>
     </form>
 </div>
+<?php endif; ?>
 
-<div class="comment-list">
-    <h2><?php echo $this->__('Comments'); ?></h2>
-    <?php if ($comments->getSize()): ?>
-        <?php foreach ($comments as $comment): ?>
-            <div class="comment">
-                <div class="comment-header">
-                    <span class="comment-user"><?php echo $this->__('Commented by:'); ?> <?php echo $this->getUserName($comment->getUserId()); ?></span>
-                    <span class="comment-date"><?php echo $this->__('Date:'); ?> <?php echo $comment->getCreatedAt(); ?></span>
-                </div>
-                <div class="comment-text"><?php echo $comment->getComment(); ?></div>
-            </div>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <div class="no-comments"><?php echo $this->__('No comments yet.'); ?></div>
-    <?php endif; ?>
+<div class="comment-table">
+
+<?php 
+    // echo $this->getChildHtml('ticket.view.comment');
+    echo $this->getChildHtml('comment');
+?>
 </div>
-
-<script>
-    var updateUrl = '<?php echo $this->getUpdateUrl() ?>';
-</script>

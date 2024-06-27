@@ -11,7 +11,7 @@ class Ccc_Ticket_Block_Adminhtml_View extends Mage_Adminhtml_Block_Widget_Contai
     }
     public function getTicketDetails()
     {
-        $id = $this->getRequest()->getParam('id');
+        $id = $this->getRequest()->getParam('id');  
         return Mage::getModel('ticket/ticket')->load($id);
     }
 
@@ -31,9 +31,7 @@ class Ccc_Ticket_Block_Adminhtml_View extends Mage_Adminhtml_Block_Widget_Contai
     {
         return Mage::getModel('ticket/status')->load($code, 'code')
             ->getColorCode();
-        
     }
-
     public function getUpdateUrl()
     {
         return $this->getUrl('adminhtml/ticket/updateTicket');
@@ -42,15 +40,21 @@ class Ccc_Ticket_Block_Adminhtml_View extends Mage_Adminhtml_Block_Widget_Contai
     {
         return $this->getUrl('adminhtml/comment/save');
     }
-    public function getAllComments($id)
-    {
-        return Mage::getModel('ticket/comment')
-            ->getCollection()
-            ->addFieldToFilter('ticket_id', $id);
-    }
     public function getUserName($id)
     {
         return Mage::getModel('admin/user')->load($id)->getUsername();
+    }
+
+    public function commentExist($ticketId)
+    {
+        $collection = Mage::getModel('ticket/comment')
+            ->getCollection()
+            ->addFieldToFilter('ticket_id', $ticketId);
+        $records = $collection->getSize();
+        if ($records){
+            return 1;
+        }
+        return 0;
     }
 
 }
