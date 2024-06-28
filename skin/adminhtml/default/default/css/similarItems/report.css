@@ -1,0 +1,29 @@
+h1 {
+    text-align: center;
+}
+
+.main-container {
+    display: flex;
+    width: 100%; 
+    margin-top: 20px; 
+}
+
+.left-sidebar {
+    width: 25%; 
+    padding: 10px;
+}
+
+.sidebar-content {
+    margin-bottom: 20px;
+}
+
+.product-grid {
+    width: 75%; 
+    padding: 10px; 
+}
+
+.loadButton {
+    display: block;
+    width: 20%; 
+    margin-top: 10px; 
+}

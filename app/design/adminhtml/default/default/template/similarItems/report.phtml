@@ -1,0 +1,20 @@
+<h1>Report</h1>
+<div class="main-container">
+    <div class="left-sidebar">
+        <div class="sidebar-content">
+            <label for="productOptions">Select Product:</label>
+            <select class="productOptions">
+                <?php foreach ($this->getProductArray() as $key=>$value): ?>
+                    <option value="<?php echo $key ?>"><?php echo $value ?></option>
+                <?php endforeach; ?>
+            </select>
+            <button class="loadButton" data-url="<?php echo $this->getUrl('adminhtml/similarItems/product') ?>">Load</button>
+        </div>
+        <div class="item-details">
+            <?php echo $this->getChildHtml('report.item'); ?>
+        </div>
+    </div>
+    <div class="product-grid">
+        <?php echo $this->getChildHtml('report.Grid') ?>
+    </div>
+</div>

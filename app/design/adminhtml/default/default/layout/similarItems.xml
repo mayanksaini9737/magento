@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_similaritems_index>
+        <reference name="content">
+            <block type="similarItems/adminhtml_similarItems" name="similarItem" />
+        </reference>
+    </adminhtml_similaritems_index>
+
+    <adminhtml_similaritems_new>
+        <update handle="adminhtml_similaritems_edit" />
+    </adminhtml_similaritems_new>
+    <adminhtml_similaritems_edit>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="similarItems/adminhtml_similarItems_edit" name="similarItem-edit"></block>
+        </reference>
+    </adminhtml_similaritems_edit>
+    <adminhtml_similaritems_report>
+        <reference name="head">
+            <action method="addCss">
+                <script>css/similarItems/report.css</script>
+            </action>
+            <action method="addJs">
+                <script>lib/jquery/jquery-1.10.2.js</script>
+            </action>
+            <action method="addJs">
+                <script>similaritems/similaritems.js</script>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="similarItems/adminhtml_report" name="report" template="similarItems/report.phtml">
+                <block type="similarItems/adminhtml_item" name="report.item" />
+                <block type="similarItems/adminhtml_products_grid" name="report.Grid" />
+            </block>
+        </reference>
+    </adminhtml_similaritems_report>
+</layout>

@@ -66,11 +66,11 @@
                 <class>Ccc_Promotions_Model</class>
                 <resourceModel>promotions_resource</resourceModel>
             </promotions>
-            <catalog>
+            <!-- <catalog>
                 <rewrite>
                     <product>Ccc_Promotions_Model_Product</product>
                 </rewrite>
-            </catalog>
+            </catalog> -->
             <promotions_resource>
                 <class>Ccc_Promotions_Model_Resource</class>
                 <entities>

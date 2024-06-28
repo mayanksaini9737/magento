@@ -1,0 +1,11 @@
+<?php $product = $this->getProduct(); ?>
+<?php if ($product): ?>
+    <div class="product-detalis">
+        <h1>Product Details</h1>
+        <div>Product Name: <?php echo $product->getName(); ?></div>
+        <div>Product Sku: <?php echo $product->getSku(); ?></div>
+    </div>
+    <?php if ($this->similarItemButton() == 1): ?>
+        <button class="similarItems" data-id="<?php echo $product->getId()?>" data-url="<?php echo $this->getUrl('adminhtml/similarItems/sameItems') ?>">Show Similar Items</button>
+    <?php endif; ?>
+<?php endif; ?>

@@ -4,7 +4,7 @@ class Ccc_Reportmanager_Adminhtml_Catalog_ProductController extends Mage_Adminht
 {
     public function saveReportAction()
     {
-        $filter = $this->getRequest()->getParam('filter');
+        $filter = $this->getRequest()->getParam('filterData');
         $filterArray = json_decode($filter, true);
 
         $user = Mage::getSingleton('admin/session')->getUser();
@@ -14,18 +14,18 @@ class Ccc_Reportmanager_Adminhtml_Catalog_ProductController extends Mage_Adminht
         echo $userId;
         die;
         
-        // $model = Mage::getModel('filterreport/report');
-        // $model->setUserId($userId);
-        // $model->setFilters(json_encode($filterData));  // Convert the filters to JSON
-        // $model->setCreatedAt(now());
+        $model = Mage::getModel('reportmanager/reportmanager');
+        $model->setUserId($userId);
+        $model->setFilters(json_encode($filterArray));  // Convert the filters to JSON
+        $model->setCreatedAt(now());
 
-        // try {
-        //     $model->save();
-        //     Mage::getSingleton('adminhtml/session')->addSuccess('Report saved successfully.');
-        // } catch (Exception $e) {
-        //     Mage::getSingleton('adminhtml/session')->addError('Error saving report.');
-        // }
+        try {
+            $model->save();
+            Mage::getSingleton('adminhtml/session')->addSuccess('Report saved successfully.');
+        } catch (Exception $e) {
+            Mage::getSingleton('adminhtml/session')->addError('Error saving report.');
+        }
 
-        // $this->_redirectReferer();
+        $this->_redirectReferer();
     }
 }

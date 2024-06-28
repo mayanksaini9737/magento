@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <catalog translate="title" module="similarItems">
+            <children>
+                <similarItems translate="title" module="similarItems">
+                    <title>Similar Items</title>
+                    <children>
+                        <similar_items>
+                            <title>Manage Similar Items</title>
+                            <sort>400</sort>
+                            <action>adminhtml/similarItems/index</action>
+                        </similar_items>
+                        <similarItem_report>
+                            <title>Similar Items Report</title>
+                            <sort>20</sort>
+                            <action>adminhtml/similarItems/report</action>
+                        </similarItem_report>
+                    </children>
+                </similarItems>
+            </children>
+        </catalog>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <similarItems translate="title" module="similarItems"></similarItems>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
